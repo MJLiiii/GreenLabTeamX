@@ -1,0 +1,3 @@
+run_id,query_id,benchmark,split,category,router,final_model,models_called,num_generate_calls,extracted_answer,reference,correct,extraction_failed,truncated,started_at_ms,ended_at_ms,latency_s,routing_latency_s,prompt_tokens_total,completion_tokens_total,error
+009_always_small__mmlu_pro__rep1,1803,mmlu_pro,eval,law,always_small,qwen3.5:4b,qwen3.5:4b,1,,J,False,True,True,1790686347767,1790686359741,11.974857660999987,0.00035437500628177077,523,1024,
+009_always_small__mmlu_pro__rep1,2783,mmlu_pro,eval,psychology,always_small,qwen3.5:4b,qwen3.5:4b,1,I,I,True,False,False,1790686359742,1790686366209,6.467492933006724,0.00016023300122469664,140,550,

@@ -1,0 +1,7 @@
+run_id,query_id,benchmark,split,category,router,final_model,models_called,num_generate_calls,extracted_answer,reference,correct,extraction_failed,truncated,started_at_ms,ended_at_ms,latency_s,routing_latency_s,prompt_tokens_total,completion_tokens_total,error
+005_always_small__mmlu_pro__rep1,8765,mmlu_pro,train,math,always_small,qwen3.5:4b,qwen3.5:4b,1,,G,False,True,True,1790685582793,1790685594720,11.927106267990894,0.0003468549984972924,246,1024,
+005_always_small__mmlu_pro__rep1,6923,mmlu_pro,train,economics,always_small,qwen3.5:4b,qwen3.5:4b,1,,B,False,True,True,1790685594720,1790685606689,11.968425352999475,0.0001288920029764995,321,1024,
+005_always_small__mmlu_pro__rep1,4369,mmlu_pro,train,chemistry,always_small,qwen3.5:4b,qwen3.5:4b,1,,I,False,True,True,1790685606689,1790685618700,12.010867035991396,0.00013342199963517487,435,1024,
+005_always_small__mmlu_pro__rep1,10013,mmlu_pro,train,physics,always_small,qwen3.5:4b,qwen3.5:4b,1,A,A,True,False,False,1790685618700,1790685628227,9.52654337399872,0.00020347299869172275,331,811,
+005_always_small__mmlu_pro__rep1,7614,mmlu_pro,train,economics,always_small,qwen3.5:4b,qwen3.5:4b,1,J,J,True,False,False,1790685628227,1790685631952,3.725571212999057,0.00013992199092172086,170,312,
+005_always_small__mmlu_pro__rep1,5714,mmlu_pro,train,other,always_small,qwen3.5:4b,qwen3.5:4b,1,J,J,True,False,False,1790685631952,1790685640788,8.835332952992758,0.00018076198466587812,180,760,

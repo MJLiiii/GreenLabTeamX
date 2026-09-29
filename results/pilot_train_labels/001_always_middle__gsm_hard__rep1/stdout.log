@@ -1,0 +1,18 @@
+Router: always_middle | benchmark: gsm_hard/train | questions: 6 | output: /home/gl_teamx/GreenLabTeamX/results/pilot_train_labels/001_always_middle__gsm_hard__rep1
+[   978] qwen3.5:9b                            14.30s  no  answer=2 ref=319105.5
+[  1282] qwen3.5:9b                            14.20s  no  answer=22 ref=4665278.5
+[  1134] qwen3.5:9b                            14.24s  no  answer=10,125 ref=0.0
+[   702] qwen3.5:9b                             4.85s  ok  answer=200 ref=200.0
+[   959] qwen3.5:9b                            13.29s  ok  answer=85398528 ref=85398528.0
+[   216] qwen3.5:9b                             7.79s  ok  answer=3496744 ref=3496744.0
+
+Final model distribution:
+  qwen3.5:9b      6  (100%)
+
+Accuracy:          50.0%
+Extraction failed: 0
+Truncated:         3
+Generate calls:    6
+Total time:        68.68s
+Mean latency:      11.45s
+Errors:            0

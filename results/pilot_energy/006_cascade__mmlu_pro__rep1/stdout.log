@@ -1,0 +1,16 @@
+Router: cascade | benchmark: mmlu_pro/eval | questions: 2 | output: /home/gl_teamx/GreenLabTeamX/results/pilot_energy/006_cascade__mmlu_pro__rep1
+[  1803] qwen3.5:4b>qwen3.5:9b                 28.32s  no  answer=C ref=J
+[  2783] qwen3.5:4b                             6.47s  ok  answer=I ref=I
+
+Final model distribution:
+  qwen3.5:4b      1  (50%)
+  qwen3.5:9b      1  (50%)
+
+Accuracy:          50.0%
+Extraction failed: 0
+Truncated:         0
+Generate calls:    3
+Total time:        34.79s
+Mean latency:      17.40s
+Errors:            0
+Energy consumption in joules: 3479.142623901367 for 35.05823 sec of execution.

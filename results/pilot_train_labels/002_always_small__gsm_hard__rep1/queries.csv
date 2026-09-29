@@ -1,0 +1,7 @@
+run_id,query_id,benchmark,split,category,router,final_model,models_called,num_generate_calls,extracted_answer,reference,correct,extraction_failed,truncated,started_at_ms,ended_at_ms,latency_s,routing_latency_s,prompt_tokens_total,completion_tokens_total,error
+002_always_small__gsm_hard__rep1,978,gsm_hard,train,,always_small,qwen3.5:4b,qwen3.5:4b,1,"1,063",319105.5,False,False,True,1790685205195,1790685214189,8.993515554000624,0.0007243820000439882,104,768,
+002_always_small__gsm_hard__rep1,1282,gsm_hard,train,,always_small,qwen3.5:4b,qwen3.5:4b,1,9330535,4665278.5,False,False,True,1790685214189,1790685223166,8.977638472002582,0.0002958940021926537,82,768,
+002_always_small__gsm_hard__rep1,1134,gsm_hard,train,,always_small,qwen3.5:4b,qwen3.5:4b,1,0,0.0,True,False,False,1790685223167,1790685228814,5.64747411099961,0.00014244200428947806,139,482,
+002_always_small__gsm_hard__rep1,702,gsm_hard,train,,always_small,qwen3.5:4b,qwen3.5:4b,1,200,200.0,True,False,False,1790685228814,1790685231641,2.8266133799916133,0.00010323199967388064,102,240,
+002_always_small__gsm_hard__rep1,959,gsm_hard,train,,always_small,qwen3.5:4b,qwen3.5:4b,1,85400528,85398528.0,False,False,False,1790685231641,1790685238181,6.540487026999472,0.00019094299932476133,123,560,
+002_always_small__gsm_hard__rep1,216,gsm_hard,train,,always_small,qwen3.5:4b,qwen3.5:4b,1,3496744,3496744.0,True,False,False,1790685238182,1790685241982,3.800626900003408,0.00011773199366871268,113,320,

@@ -1,0 +1,18 @@
+Router: always_small | benchmark: mmlu_pro/train | questions: 6 | output: /home/gl_teamx/GreenLabTeamX/results/pilot_train_labels/005_always_small__mmlu_pro__rep1
+[  8765] qwen3.5:4b                            11.93s  no  answer=None ref=G
+[  6923] qwen3.5:4b                            11.97s  no  answer=None ref=B
+[  4369] qwen3.5:4b                            12.01s  no  answer=None ref=I
+[ 10013] qwen3.5:4b                             9.53s  ok  answer=A ref=A
+[  7614] qwen3.5:4b                             3.73s  ok  answer=J ref=J
+[  5714] qwen3.5:4b                             8.84s  ok  answer=J ref=J
+
+Final model distribution:
+  qwen3.5:4b      6  (100%)
+
+Accuracy:          50.0%
+Extraction failed: 3
+Truncated:         3
+Generate calls:    6
+Total time:        57.99s
+Mean latency:      9.67s
+Errors:            0

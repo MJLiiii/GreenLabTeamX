@@ -1,0 +1,7 @@
+run_id,query_id,benchmark,split,category,router,final_model,models_called,num_generate_calls,extracted_answer,reference,correct,extraction_failed,truncated,started_at_ms,ended_at_ms,latency_s,routing_latency_s,prompt_tokens_total,completion_tokens_total,error
+001_always_middle__gsm_hard__rep1,978,gsm_hard,train,,always_middle,qwen3.5:9b,qwen3.5:9b,1,2,319105.5,False,False,True,1790685136378,1790685150682,14.304236038995441,0.000690660992404446,104,768,
+001_always_middle__gsm_hard__rep1,1282,gsm_hard,train,,always_middle,qwen3.5:9b,qwen3.5:9b,1,22,4665278.5,False,False,True,1790685150682,1790685164885,14.203022542991675,0.00028442499751690775,82,768,
+001_always_middle__gsm_hard__rep1,1134,gsm_hard,train,,always_middle,qwen3.5:9b,qwen3.5:9b,1,"10,125",0.0,False,False,True,1790685164885,1790685179127,14.241592977996334,0.00034837599378079176,139,768,
+001_always_middle__gsm_hard__rep1,702,gsm_hard,train,,always_middle,qwen3.5:9b,qwen3.5:9b,1,200,200.0,True,False,False,1790685179127,1790685183975,4.8482401840010425,0.0001018009934341535,102,259,
+001_always_middle__gsm_hard__rep1,959,gsm_hard,train,,always_middle,qwen3.5:9b,qwen3.5:9b,1,85398528,85398528.0,True,False,False,1790685183975,1790685197266,13.290730488006375,0.00018570301472209394,123,718,
+001_always_middle__gsm_hard__rep1,216,gsm_hard,train,,always_middle,qwen3.5:9b,qwen3.5:9b,1,3496744,3496744.0,True,False,False,1790685197266,1790685205057,7.791181956999935,0.00012924199108965695,113,419,

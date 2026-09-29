@@ -1,0 +1,16 @@
+Router: mf | benchmark: mmlu_pro/eval | questions: 2 | output: /home/gl_teamx/GreenLabTeamX/results/pilot_energy/004_mf__mmlu_pro__rep1
+[  1803] qwen3.5:27b                           41.46s  ok  answer=J ref=J
+[  2783] qwen3.5:4b                             5.80s  ok  answer=I ref=I
+
+Final model distribution:
+  qwen3.5:27b     1  (50%)
+  qwen3.5:4b      1  (50%)
+
+Accuracy:          100.0%
+Extraction failed: 0
+Truncated:         0
+Generate calls:    2
+Total time:        47.27s
+Mean latency:      23.63s
+Errors:            0
+Energy consumption in joules: 4790.450866699219 for 47.46739 sec of execution.
