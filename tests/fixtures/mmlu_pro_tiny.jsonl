@@ -1,0 +1,2 @@
+{"id": "tiny1", "text": "What is the chemical formula of water?", "reference": "B", "choices": ["CO2", "H2O", "NaCl", "O2"], "category": "chemistry"}
+{"id": "tiny2", "text": "Which planet is known as the Red Planet?", "reference": "C", "choices": ["Venus", "Jupiter", "Mars", "Saturn"], "category": "other"}

@@ -1,0 +1,3 @@
+{"id": "tiny1", "text": "Tom has 3 apples and buys 4 more. How many apples does he have now?", "reference": "7.0", "choices": [], "category": null}
+{"id": "tiny2", "text": "A box holds 12 pencils. How many pencils are in 5 boxes?", "reference": "60.0", "choices": [], "category": null}
+{"id": "tiny3", "text": "Sara had 20 dollars and spent 8 dollars. How many dollars does she have left?", "reference": "12.0", "choices": [], "category": null}

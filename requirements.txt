@@ -1,0 +1,3 @@
+# Runtime dependencies. Install with: .venv/bin/pip install -r requirements.txt
+numpy==2.5.3        # matrix-factorization router
+datasets==5.0.1     # scripts/prepare_data.py (downloads MMLU-Pro and GSM-Hard)

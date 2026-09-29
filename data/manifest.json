@@ -1,0 +1,46 @@
+{
+  "benchmarks": {
+    "gsm_hard": {
+      "hf_id": "reasoning-machines/gsm-hard",
+      "hf_split": "train",
+      "revision": "960448f73503112d4226baeb8eb41d3fb5ae2506",
+      "n_source": 1319,
+      "n_duplicates_dropped": 0,
+      "n_too_long_dropped": 0,
+      "splits": {
+        "train": {
+          "file": "data/gsm_hard_train.jsonl",
+          "n": 600,
+          "sha256": "e57083bbdbfd2cede407a02d2b17957c1e4ca95d1ba39d7d57056e754c3768a3"
+        },
+        "eval": {
+          "file": "data/gsm_hard_eval.jsonl",
+          "n": 200,
+          "sha256": "32df4f8eac97573923897f8a6a36e44ff67a1f20285d8b055ecccd902cac7556"
+        }
+      }
+    },
+    "mmlu_pro": {
+      "hf_id": "TIGER-Lab/MMLU-Pro",
+      "hf_split": "test",
+      "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+      "n_source": 12032,
+      "n_duplicates_dropped": 391,
+      "n_too_long_dropped": 0,
+      "splits": {
+        "train": {
+          "file": "data/mmlu_pro_train.jsonl",
+          "n": 600,
+          "sha256": "e9f4a1e4c2e09ea9c0dbdc79b5823ea127700c0c2a25a237919e8ec884b3df35"
+        },
+        "eval": {
+          "file": "data/mmlu_pro_eval.jsonl",
+          "n": 200,
+          "sha256": "1ba763d441e243d5c7e1ce3550f8f841455eb144cf5bd52a4cd4d83f47a37928"
+        }
+      }
+    }
+  },
+  "seed": 42,
+  "updated_at": "2026-09-29T12:09:58+00:00"
+}
