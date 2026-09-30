@@ -52,6 +52,7 @@ QUERY_FIELDS = [
     "started_at_ms",
     "ended_at_ms",
     "latency_s",
+    "latency_ms",
     "routing_latency_s",
     "prompt_tokens_total",
     "completion_tokens_total",
@@ -95,7 +96,7 @@ def parse_args(argv=None):
     )
     parser.add_argument("--router", required=True, choices=sorted(ROUTERS))
     parser.add_argument("--benchmark", required=True, choices=sorted(BENCHMARKS))
-    parser.add_argument("--split", choices=["train", "eval"], default="eval")
+    parser.add_argument("--split", choices=["calibration", "train", "eval"], default="eval")
     parser.add_argument(
         "--limit", type=int, default=None, help="only run the first N questions",
     )
@@ -125,7 +126,7 @@ def run_query(client, router, benchmark, question, run_id, split):
     final = None
     error = None
     try:
-        final = router.answer(question, session)
+        final = router.run(question, session)
     except OllamaError as e:
         # Keep going so one failed query does not lose the rest of the run.
         error = str(e)
@@ -164,8 +165,9 @@ def run_query(client, router, benchmark, question, run_id, split):
         "started_at_ms": started_at_ms,
         "ended_at_ms": ended_at_ms,
         "latency_s": latency_s,
-        # Everything except generating the final answer: embedding, rejected
-        # cascade stages and the router's own work.
+        "latency_ms": latency_s * 1000.0,
+        # Time before the final generate call (embedding, rejected cascade
+        # stages, router work). latency_ms is the end-to-end figure.
         "routing_latency_s": latency_s - (final_call.latency_s if final_call else 0.0),
         "prompt_tokens_total": sum(c.prompt_tokens or 0 for c in generate_calls),
         "completion_tokens_total": sum(c.completion_tokens or 0 for c in generate_calls),
@@ -179,7 +181,7 @@ def main(argv=None):
 
     benchmark = BENCHMARKS[args.benchmark]
     try:
-        router = build_router(args.router, args.threshold)
+        router = build_router(args.router, args.threshold, benchmark=args.benchmark)
     except (FileNotFoundError, ValueError) as e:
         print(f"Cannot build router {args.router!r}: {e}", file=sys.stderr)
         return 2
@@ -287,6 +289,7 @@ def _summary(rows, calls, total_seconds) -> dict:
         "model_reloads": len(reloads),
         "total_seconds": total_seconds,
         "mean_latency_s": sum(r["latency_s"] for r in rows) / n if n else None,
+        "mean_latency_ms": sum(r["latency_ms"] for r in rows) / n if n else None,
     }
 
 
@@ -330,6 +333,7 @@ def _print_summary(summary):
     print(f"Total time:        {summary['total_seconds']:.2f}s")
     if summary["mean_latency_s"] is not None:
         print(f"Mean latency:      {summary['mean_latency_s']:.2f}s")
+        print(f"Mean latency:      {summary['mean_latency_ms']:.0f} ms/query")
     print(f"Errors:            {summary['errors']}")
     if summary["model_reloads"]:
         print(

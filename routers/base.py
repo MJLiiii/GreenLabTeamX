@@ -72,6 +72,16 @@ class BaseRouter(ABC):
 
         return attempt
 
+    def run(self, query: Question, llm: LLM) -> Attempt:
+        """Strategy interface. The runner times this call.
+
+        End-to-end latency therefore includes the routing decision and every
+        generate or embed performed to produce the final answer, including
+        cascade steps that are rejected. Strategies do not load models and do
+        not record energy.
+        """
+        return self.answer(query, llm)
+
     def config(self) -> dict:
         """Settings needed to reproduce this router's decisions.
 

@@ -72,6 +72,14 @@ class CalibrateTest(unittest.TestCase):
         # Written to router_calibration.json, so it must be plain JSON.
         json.dumps(chosen)
 
+    def test_keys_stay_inside_one_benchmark(self):
+        from scripts.fit_routers import keys_for_benchmark
+
+        labels = {("mmlu_pro", "1"): {}, ("gsm_hard", "1"): {}, ("mmlu_pro", "2"): {}}
+        questions = {("mmlu_pro", "1"): None, ("gsm_hard", "1"): None}
+        self.assertEqual(keys_for_benchmark(labels, questions, "mmlu_pro"), [("mmlu_pro", "1")])
+        self.assertEqual(keys_for_benchmark(labels, questions, "gsm_hard"), [("gsm_hard", "1")])
+
 
 if __name__ == "__main__":
     unittest.main()

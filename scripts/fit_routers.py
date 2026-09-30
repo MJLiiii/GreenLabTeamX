@@ -1,18 +1,20 @@
 """
 Fit the matrix-factorization router and calibrate the cascade and MF thresholds.
 
-Uses the train-split answers of the three fixed-model baselines:
+Fit one matrix-factorization router per benchmark and calibrate cascade and
+MF thresholds on that benchmark's calibration split only. MMLU-Pro and
+GSM-Hard are never fitted together. Eval labels are ignored.
 
-    python -m experiment.run_experiment --exp-id train_labels --split train \
-        --routers always_small always_middle always_large --reps 1 --no-energy
-    python -m scripts.fit_routers --results results/train_labels
+    python -m experiment.run_experiment --exp-id calibration --split train \
+        --routers small_only medium_only large_only --reps 1 --no-energy
+    python -m scripts.fit_routers --results results/calibration
 
 Writes:
-    artifacts/mf_router.npz            MF weights, models, embedding model, fingerprint
-    artifacts/router_calibration.json  thresholds used by routers/__init__.py
+    artifacts/mf_<benchmark>.npz       MF weights for that benchmark only
+    artifacts/router_calibration.json  per-benchmark thresholds
     artifacts/threshold_sweep.csv      simulated accuracy and cost per threshold
 
-Both thresholds are chosen with the same rule, on train data only: the
+Both thresholds are chosen on calibration data only: the
 cheapest threshold whose simulated accuracy is at least
 config.CALIBRATION_QUALITY_TARGET × always-large's accuracy. The simulation
 replays the logged answers through the real router classes. This is valid
@@ -43,7 +45,7 @@ from routers.cascade import CascadeRouter
 from routers.matrix_factorization import MatrixFactorizationRouter, predict_matrix
 
 SWEEP_FIELDS = [
-    "router", "subset", "threshold", "n", "accuracy", "cost_s",
+    "benchmark", "router", "subset", "threshold", "n", "accuracy", "cost_s",
     "target_accuracy", "meets_target", *(f"share_{m}" for m in config.MODEL_ORDER),
 ]
 
@@ -87,74 +89,119 @@ def main():
     fingerprint = config.settings_fingerprint()
 
     labels = load_labels(args.results, fingerprint)
-    if len(labels) < 10:
+    questions = question_index()
+    names = sorted({key[0] for key in labels if key in questions})
+    if not names:
         print(
-            f"Only {len(labels)} train questions have answers from all of "
-            f"{config.MODEL_ORDER}. Collect train labels first (see --help).",
+            "No calibration questions have answers from all of "
+            f"{config.MODEL_ORDER}. Collect calibration labels first (see --help).",
             file=sys.stderr,
         )
         return 1
 
-    questions = {
-        (name, q.id): q
-        for name, benchmark in BENCHMARKS.items()
-        for q in benchmark.load("train")
-    }
-    keys = sorted(key for key in labels if key in questions)
-    print(f"Train questions with labels from all models: {len(keys)}")
-
     client = OllamaClient(base_url=config.OLLAMA_URL, timeout=config.CLIENT_TIMEOUT_S)
-    embeddings = embed_texts(client, [questions[key].text for key in keys])
-    embedding_by_key = dict(zip(keys, embeddings))
-
-    Y = np.array([[labels[k][m].correct for m in config.MODEL_ORDER] for k in keys], float)
-    position = {key: row for row, key in enumerate(keys)}
-    fit_keys, val_keys = _split(keys, config.MF["val_fraction"], config.SEED)
-    fit_rows = [position[k] for k in fit_keys]
-    val_rows = [position[k] for k in val_keys]
-
-    W, V, b = fit_mf(
-        embeddings[fit_rows], Y[fit_rows],
-        **{k: config.MF[k] for k in ("rank", "l2", "lr", "epochs")},
-    )
-    report_fit(W, V, b, embeddings, Y, fit_keys, fit_rows, val_keys, val_rows)
-
+    fitted = {}
     sweep = []
-    cascade = calibrate(
-        "cascade", lambda t: CascadeRouter(t), keys, "train",
-        labels, questions, embedding_by_key, sweep,
-    )
-    mf = calibrate(
-        "mf", lambda t: MatrixFactorizationRouter(W, V, b, t), val_keys, "train-val",
-        labels, questions, embedding_by_key, sweep,
-    )
+    for name in names:
+        keys = keys_for_benchmark(labels, questions, name)
+        if len(keys) < 10:
+            print(f"Skipping {name}: only {len(keys)} labeled questions.")
+            continue
+        print(f"\n{name}: {len(keys)} calibration questions with labels from all models")
+        fitted[name] = fit_benchmark(
+            name, keys, labels, questions, client, sweep, fingerprint,
+        )
 
-    # Serialize before writing anything, so a failure cannot leave the
-    # MF weights and the calibration out of sync.
-    calibration = json.dumps({
+    if not fitted:
+        print("Nothing was fitted.", file=sys.stderr)
+        return 1
+
+    payload = {
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "fingerprint": fingerprint,
         "quality_target": config.CALIBRATION_QUALITY_TARGET,
-        "n_train_questions": len(keys),
         "results": [str(path) for path in args.results],
-        "routers": {"cascade": cascade, "mf": mf},
-    }, indent=2)
+        "benchmarks": fitted,
+    }
+    if len(fitted) == 1:
+        only = next(iter(fitted.values()))
+        payload["routers"] = {
+            "cascade": only["cascade"],
+            "matrix_factorization": only["matrix_factorization"],
+            "mf": only["matrix_factorization"],
+        }
+
+    config.ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
+    config.CALIBRATION_FILE.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    _write_sweep(config.ARTIFACTS_DIR / "threshold_sweep.csv", sweep)
+    print(f"\nWrote {config.CALIBRATION_FILE}")
+    print(f"Wrote {config.ARTIFACTS_DIR / 'threshold_sweep.csv'}")
+    for name in fitted:
+        print(f"Wrote {config.mf_artifact(name)}")
+    return 0
+
+
+def question_index() -> dict:
+    """Calibration questions only. The eval split is not loaded."""
+    questions = {}
+    for name, benchmark in BENCHMARKS.items():
+        path = benchmark.data_path("calibration")
+        if path.exists() and path.name != f"{name}_eval.jsonl":
+            for question in benchmark.load("calibration"):
+                questions[(name, question.id)] = question
+    return questions
+
+
+def keys_for_benchmark(labels, questions, benchmark) -> list:
+    """Label keys for one benchmark. Other benchmarks are left out."""
+    return sorted(key for key in labels if key[0] == benchmark and key in questions)
+
+
+def fit_benchmark(name, keys, labels, questions, client, sweep, fingerprint) -> dict:
+    """Fit MF and calibrate both routers on this benchmark's calibration keys."""
+    texts = [questions[key].text for key in keys]
+    embeddings = embed_texts(client, texts)
+    embedding_by_key = dict(zip(keys, embeddings))
+
+    matrix = np.array(
+        [[labels[key][model].correct for model in config.MODEL_ORDER] for key in keys],
+        float,
+    )
+    position = {key: row for row, key in enumerate(keys)}
+    fit_keys, val_keys = _split(keys, config.MF["val_fraction"], config.SEED)
+    fit_rows = [position[key] for key in fit_keys]
+    val_rows = [position[key] for key in val_keys]
+
+    weights, factors, bias = fit_mf(
+        embeddings[fit_rows], matrix[fit_rows],
+        **{key: config.MF[key] for key in ("rank", "l2", "lr", "epochs")},
+    )
+    report_fit(weights, factors, bias, embeddings, matrix, fit_keys, fit_rows, val_keys, val_rows)
+
+    start = len(sweep)
+    cascade = calibrate(
+        "cascade", lambda threshold: CascadeRouter(threshold), keys, "calibration",
+        labels, questions, embedding_by_key, sweep,
+    )
+    matrix_factorization = calibrate(
+        "matrix_factorization",
+        lambda threshold: MatrixFactorizationRouter(weights, factors, bias, threshold),
+        val_keys, "calibration-val",
+        labels, questions, embedding_by_key, sweep,
+    )
+    for row in sweep[start:]:
+        row["benchmark"] = name
 
     config.ARTIFACTS_DIR.mkdir(parents=True, exist_ok=True)
     np.savez(
-        config.MF_ARTIFACT,
-        W=W, V=V, b=b,
+        config.mf_artifact(name),
+        W=weights, V=factors, b=bias,
         models=np.array(config.MODEL_ORDER),
         embedding_model=np.array(config.EMBEDDING_MODEL),
         fingerprint=np.array(fingerprint),
+        benchmark=np.array(name),
     )
-    config.CALIBRATION_FILE.write_text(calibration + "\n", encoding="utf-8")
-    _write_sweep(config.ARTIFACTS_DIR / "threshold_sweep.csv", sweep)
-
-    print(f"\nWrote {config.MF_ARTIFACT}")
-    print(f"Wrote {config.CALIBRATION_FILE}")
-    print(f"Wrote {config.ARTIFACTS_DIR / 'threshold_sweep.csv'}")
-    return 0
+    return {"cascade": cascade, "matrix_factorization": matrix_factorization}
 
 
 # ---------------------------------------------------------------------------
@@ -168,7 +215,7 @@ def load_labels(result_dirs, fingerprint) -> dict:
 
     for run_json in sorted(p for d in result_dirs for p in Path(d).rglob("run.json")):
         info = json.loads(run_json.read_text(encoding="utf-8"))
-        if info.get("split") != "train" or info["router"].get("class") != "FixedModelRouter":
+        if info.get("split") not in ("train", "calibration") or info["router"].get("class") != "FixedModelRouter":
             continue
         if info.get("settings_fingerprint") != fingerprint:
             skipped += 1

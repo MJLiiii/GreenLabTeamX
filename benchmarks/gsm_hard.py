@@ -1,8 +1,10 @@
 """
-GSM-Hard (reasoning-machines/gsm-hard): GSM8K word problems with large numbers.
+GSM-Hard (reasoning-machines/gsm-hard): grade-school word problems with large numbers.
 
-The reference answer is a float computed by a program, so answers are
-compared numerically with a small tolerance.
+The reference answer is a float computed by a program. Correctness is exact
+match of the extracted final number against that reference. Whole-number
+disagreements are wrong. Absolute tolerance 1e-2 only absorbs the float
+noise in the dataset targets (for example 3244047.0999999996).
 """
 
 import math

@@ -5,10 +5,10 @@ Run the experiment: every router × benchmark × repetition, measured with Energ
     python -m experiment.run_experiment --exp-id main
     python -m experiment.run_experiment --exp-id main --resume
 
-Collect the train labels for scripts/fit_routers.py (no energy measurement):
+Collect calibration labels for scripts/fit_routers.py (no energy measurement):
 
-    python -m experiment.run_experiment --exp-id train_labels --split train \
-        --routers always_small always_middle always_large --reps 1 --no-energy
+    python -m experiment.run_experiment --exp-id calibration --split train \
+        --routers small_only medium_only large_only --reps 1 --no-energy
 
 Protocol:
   1. make sure all models are loaded (fixed order, see experiment/models.py)
@@ -26,7 +26,6 @@ import argparse
 import csv
 import json
 import random
-import re
 import subprocess
 import sys
 import time
@@ -38,8 +37,11 @@ from benchmarks import BENCHMARKS
 from benchmarks.base import load_questions
 from experiment.models import check_resident, gpu_snapshot, load_all
 from experiment.session import QuerySession
+from measurement.aggregate import summarize_run
+from measurement.energibridge import summary_joules, wrap
+from measurement.hardware import collect_hardware
 from ollama_client import OllamaClient
-from routers import ROUTERS, build_router
+from routers import CANONICAL_STRATEGIES, ROUTERS, build_router
 
 MANIFEST_FIELDS = [
     "run_id",
@@ -61,6 +63,13 @@ MANIFEST_FIELDS = [
     "resident_ok_after",
     "n_queries",
     "n_errors",
+    "accuracy",
+    "mean_latency_ms",
+    "mean_j_per_query",
+    "mean_gpu_utilization_pct",
+    "mean_cpu_utilization_pct",
+    "peak_gpu_memory_mib",
+    "peak_system_memory_bytes",
     "run_dir",
 ]
 
@@ -68,18 +77,19 @@ MANIFEST_FIELDS = [
 # but some queries failed; those failures are recorded per query.
 FINISHED = {"done", "errors"}
 
-SUMMARY_PATTERN = re.compile(r"Energy consumption in joules: ([\d.eE+-]+)")
-
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(
-        description="Run every router × benchmark × repetition, wrapped in EnergiBridge."
+        description="Run every strategy × benchmark × repetition, wrapped in EnergiBridge."
     )
-    parser.add_argument("--routers", nargs="+", default=list(ROUTERS), choices=sorted(ROUTERS))
     parser.add_argument(
-        "--benchmarks", nargs="+", default=list(BENCHMARKS), choices=sorted(BENCHMARKS),
+        "--routers", nargs="+", default=list(CANONICAL_STRATEGIES), choices=sorted(ROUTERS),
     )
-    parser.add_argument("--split", choices=["train", "eval"], default="eval")
+    parser.add_argument(
+        "--benchmarks", nargs="+",
+        default=list(config.EXPERIMENT_BENCHMARKS), choices=sorted(BENCHMARKS),
+    )
+    parser.add_argument("--split", choices=["calibration", "train", "eval"], default="eval")
     parser.add_argument("--reps", type=int, default=config.EXPERIMENT["repetitions"])
     parser.add_argument("--limit", type=int, default=None, help="questions per run")
     parser.add_argument("--exp-id", default=None, help="default: <split>_<timestamp>")
@@ -168,15 +178,20 @@ def main(argv=None):
         return 1
 
     # Fail now rather than hours into the experiment (e.g. no MF artifact).
-    for name in sorted({run["router"] for run in runs if run["kind"] == "run"}):
+    pairs = sorted({
+        (run["router"], run["benchmark"])
+        for run in runs if run["kind"] == "run"
+    })
+    for name, benchmark in pairs:
         try:
-            build_router(name, _threshold(settings, name))
-        except (FileNotFoundError, ValueError) as e:
-            print(f"Cannot build router {name!r}: {e}", file=sys.stderr)
+            build_router(name, _threshold(settings, name), benchmark=benchmark)
+        except (FileNotFoundError, ValueError, KeyError) as e:
+            print(f"Cannot build router {name!r} for {benchmark}: {e}", file=sys.stderr)
             return 2
 
     exp_dir.mkdir(parents=True, exist_ok=True)
     if not args.resume:
+        settings["hardware"] = collect_hardware()
         _write_json(exp_dir / "experiment.json", settings)
     _write_manifest(exp_dir, runs)
 
@@ -255,18 +270,34 @@ def execute(run, exp_dir, settings, client):
             print(f"    WARNING: {problem}")
         _ensure_resident(client)
 
+    metrics = summarize_run(run_dir, hardware=settings.get("hardware"))
+    for field in (
+        "accuracy", "mean_latency_ms", "mean_j_per_query",
+        "mean_gpu_utilization_pct", "mean_cpu_utilization_pct",
+        "peak_gpu_memory_mib", "peak_system_memory_bytes",
+    ):
+        if metrics.get(field) is not None:
+            run[field] = metrics[field]
+
 
 def warm_up(client, seconds, benchmarks, log=print):
-    """Generate with every model for a while, using train questions only."""
+    """Generate with every model for a while, on calibration questions only."""
     if seconds <= 0 or not benchmarks:
         return
 
-    # Interleave benchmarks so every model sees both kinds of prompts.
-    per_benchmark = [b.load("train", limit=20) for b in benchmarks]
+    loaded = []
+    for benchmark in benchmarks:
+        questions = _warmup_questions(benchmark)
+        if questions:
+            loaded.append((benchmark, questions))
+    if not loaded:
+        log("Warm-up skipped: no calibration questions on disk.")
+        return
+
     pool = [
         (benchmark, question)
-        for questions in zip(*per_benchmark)
-        for benchmark, question in zip(benchmarks, questions)
+        for bundle in zip(*(questions for _, questions in loaded))
+        for benchmark, question in zip((item[0] for item in loaded), bundle)
     ]
 
     log(f"Warming up for {seconds:.0f}s ...")
@@ -284,6 +315,15 @@ def warm_up(client, seconds, benchmarks, log=print):
 
     benchmark, question = pool[0]
     QuerySession(client, benchmark, question).embed(question.text)
+
+
+def _warmup_questions(benchmark, limit=20):
+    """Calibration/train questions only. Eval is never used for warm-up."""
+    for split in ("calibration", "train"):
+        path = benchmark.data_path(split)
+        if path.exists() and split != "eval":
+            return benchmark.load(split, limit=limit)
+    return []
 
 
 # ---------------------------------------------------------------------------
@@ -341,17 +381,7 @@ def _command(run, run_dir, settings) -> list[str]:
 
     if not settings["energy"]:
         return command
-
-    energibridge = settings["energibridge"]
-    return [
-        energibridge["path"],
-        "--output", str(run_dir / "energy.csv"),
-        "--interval", str(energibridge["interval_ms"]),
-        "--max-execution", str(energibridge["max_seconds"]),
-        "--gpu",
-        "--summary",
-        "--", *command,
-    ]
+    return wrap(command, run_dir / "energy.csv")
 
 
 def _ensure_resident(client) -> bool:
@@ -389,10 +419,9 @@ def _count_queries(path):
 
 
 def _summary_joules(log_path):
-    match = None
-    for match in SUMMARY_PATTERN.finditer(log_path.read_text(encoding="utf-8")):
-        pass
-    return float(match.group(1)) if match else None
+    if not log_path.exists():
+        return None
+    return summary_joules(log_path.read_text(encoding="utf-8"))
 
 
 def _load_experiment(exp_dir: Path):

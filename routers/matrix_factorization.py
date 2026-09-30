@@ -31,8 +31,10 @@ class MatrixFactorizationRouter(BaseRouter):
         models=None,
         embedding_model: str = config.EMBEDDING_MODEL,
         artifact: str | None = None,
+        benchmark: str | None = None,
     ):
         super().__init__(models)
+        self.benchmark = benchmark
 
         self.W = np.asarray(W, dtype=float)   # (rank, embedding_dim)
         self.V = np.asarray(V, dtype=float)   # (n_models, rank)
@@ -50,7 +52,7 @@ class MatrixFactorizationRouter(BaseRouter):
         self.artifact = artifact
 
     @classmethod
-    def load(cls, path=config.MF_ARTIFACT, threshold: float | None = None):
+    def load(cls, path=config.MF_ARTIFACT, threshold: float | None = None, benchmark: str | None = None):
         """Load a fitted router and check it matches the current config."""
         path = Path(path)
         if not path.exists():
@@ -63,7 +65,10 @@ class MatrixFactorizationRouter(BaseRouter):
             embedding_model = str(data["embedding_model"])
             fingerprint = str(data["fingerprint"])
             W, V, b = data["W"], data["V"], data["b"]
+            stored_benchmark = str(data["benchmark"]) if "benchmark" in data.files else None
 
+        if benchmark and stored_benchmark and stored_benchmark != benchmark:
+            raise ValueError(f"{path} was fitted for {stored_benchmark}, not {benchmark}.")
         if models != config.MODEL_ORDER:
             raise ValueError(f"{path} was fitted for {models}, config uses {config.MODEL_ORDER}")
         if embedding_model != config.EMBEDDING_MODEL:
@@ -77,7 +82,10 @@ class MatrixFactorizationRouter(BaseRouter):
                 f"generation settings. Collect new train labels and refit."
             )
 
-        return cls(W, V, b, threshold, models, embedding_model, artifact=str(path))
+        return cls(
+            W, V, b, threshold, models, embedding_model,
+            artifact=str(path), benchmark=stored_benchmark or benchmark,
+        )
 
     def predict(self, embedding) -> dict[str, float]:
         """Predicted chance that each model answers correctly."""
@@ -101,6 +109,7 @@ class MatrixFactorizationRouter(BaseRouter):
             "rank": int(self.W.shape[0]),
             "embedding_model": self.embedding_model,
             "artifact": self.artifact,
+            "benchmark": self.benchmark,
         }
 
 

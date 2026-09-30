@@ -78,6 +78,18 @@ class DryRunTest(unittest.TestCase):
         self.assertIn("idle__rep2", output.getvalue())
         self.assertFalse((config.RESULTS_DIR / exp_id).exists())
 
+    def test_default_plan_is_five_strategies_on_both_benchmarks(self):
+        args = parse_args([])
+        self.assertEqual(
+            args.routers,
+            ["small_only", "medium_only", "large_only", "cascade", "matrix_factorization"],
+        )
+        self.assertEqual(args.benchmarks, ["mmlu_pro", "gsm_hard"])
+        runs = build_plan(args.routers, args.benchmarks, "eval", 1, idle=True, seed=1)
+        measured = [run for run in runs if run["kind"] == "run"]
+        self.assertEqual(len(measured), 10)
+        self.assertEqual({run["benchmark"] for run in measured}, {"mmlu_pro", "gsm_hard"})
+
 
 if __name__ == "__main__":
     unittest.main()

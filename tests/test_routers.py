@@ -79,6 +79,12 @@ class BaseRouterTest(unittest.TestCase):
         with self.assertRaises(TypeError):
             FirstModelRouter().answer("What is 1?", FakeLLM())
 
+    def test_run_is_the_strategy_interface(self):
+        llm = FakeLLM()
+        final = FirstModelRouter().run(QUESTION, llm)
+        self.assertEqual(final.model, SMALL)
+        self.assertEqual(llm.generated, [SMALL])
+
     def test_unknown_model_is_rejected(self):
         with self.assertRaises(ValueError):
             UnknownModelRouter().answer(QUESTION, FakeLLM())
@@ -270,10 +276,31 @@ class RegistryTest(unittest.TestCase):
             build_router("random")
 
     def test_registry_matches_experiment_plan(self):
+        from routers import ALIASES, CANONICAL_STRATEGIES
+
         self.assertEqual(
-            set(ROUTERS),
-            {"always_small", "always_middle", "always_large", "cascade", "mf"},
+            set(CANONICAL_STRATEGIES),
+            {"small_only", "medium_only", "large_only", "cascade", "matrix_factorization"},
         )
+        self.assertEqual(ALIASES["always_small"], "small_only")
+        self.assertEqual(build_router("small_only").name, "small_only")
+        self.assertEqual(build_router("always_small").name, "always_small")
+        self.assertEqual(build_router("medium_only").model, MIDDLE)
+        self.assertEqual(build_router("large_only").model, LARGE)
+
+    def test_thresholds_are_per_benchmark(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "calibration.json"
+            path.write_text(json.dumps({
+                "fingerprint": config.settings_fingerprint(),
+                "benchmarks": {
+                    "mmlu_pro": {"cascade": {"threshold": 0.2}},
+                    "gsm_hard": {"cascade": {"threshold": 0.8}},
+                },
+            }))
+            with mock.patch.object(config, "CALIBRATION_FILE", path):
+                self.assertEqual(build_router("cascade", benchmark="mmlu_pro").threshold, 0.2)
+                self.assertEqual(build_router("cascade", benchmark="gsm_hard").threshold, 0.8)
 
 
 if __name__ == "__main__":

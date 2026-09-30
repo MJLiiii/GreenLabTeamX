@@ -95,6 +95,14 @@ class Benchmark(ABC):
     prompt_template = ""
 
     def data_path(self, split: str) -> Path:
+        """Path of a frozen split. `calibration` uses the train file when no
+        separate calibration file has been written. Eval is a different file.
+        """
+        if split == "calibration":
+            named = config.DATA_DIR / f"{self.name}_calibration.jsonl"
+            if named.exists():
+                return named
+            return config.DATA_DIR / f"{self.name}_train.jsonl"
         return config.DATA_DIR / f"{self.name}_{split}.jsonl"
 
     def load(self, split: str, limit: int | None = None) -> list[Question]:

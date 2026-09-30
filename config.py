@@ -17,9 +17,17 @@ ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
 RESULTS_DIR = ROOT / "results"
 ARTIFACTS_DIR = ROOT / "artifacts"
-MF_ARTIFACT = ARTIFACTS_DIR / "mf_router.npz"
+MF_ARTIFACT = ARTIFACTS_DIR / "mf_router.npz"  # legacy pooled file, if one was fitted
 CALIBRATION_FILE = ARTIFACTS_DIR / "router_calibration.json"
 EMBEDDING_CACHE_DIR = ARTIFACTS_DIR / "embeddings"
+
+# The measured experiment. Each benchmark is scored and fitted on its own.
+EXPERIMENT_BENCHMARKS = ["mmlu_pro", "gsm_hard"]
+
+
+def mf_artifact(benchmark: str) -> Path:
+    """Weights for one benchmark. MMLU-Pro and GSM-Hard are never fitted together."""
+    return ARTIFACTS_DIR / f"mf_{benchmark}.npz"
 
 # ---------------------------------------------------------------------------
 # Models
@@ -72,8 +80,9 @@ DATASETS = {
     "gsm_hard": {"hf_id": "reasoning-machines/gsm-hard", "split": "train"},
 }
 
-# Disjoint question sets: "train" is only used to fit and calibrate the
-# routers, "eval" is only used in the measured experiment.
+# Disjoint question sets. "train" is the calibration/training split: it is the
+# only split used to collect labels, fit MF, and choose thresholds. "eval" is
+# held out. "calibration" is accepted as a name for the train file.
 SAMPLE_SIZES = {
     "mmlu_pro": {"train": 600, "eval": 200},
     "gsm_hard": {"train": 600, "eval": 200},
