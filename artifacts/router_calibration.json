@@ -1,0 +1,50 @@
+{
+  "created_at": "2026-10-04T16:49:15+00:00",
+  "fingerprint": "318ed61667c79691",
+  "quality_target": 0.95,
+  "results": [
+    "results/calibration"
+  ],
+  "benchmarks": {
+    "gsm_hard": {
+      "cascade": {
+        "threshold": 0.0,
+        "subset": "calibration",
+        "n": 164,
+        "simulated_accuracy": 0.6219512195121951,
+        "simulated_cost_s": 24.153618887670735,
+        "always_large_accuracy": 0.5853658536585366,
+        "meets_target": true
+      },
+      "matrix_factorization": {
+        "threshold": 0.8,
+        "subset": "calibration-val",
+        "n": 33,
+        "simulated_accuracy": 0.5757575757575758,
+        "simulated_cost_s": 33.09279162136364,
+        "always_large_accuracy": 0.6060606060606061,
+        "meets_target": true
+      }
+    },
+    "mmlu_pro": {
+      "cascade": {
+        "threshold": 0.0,
+        "subset": "calibration",
+        "n": 600,
+        "simulated_accuracy": 0.655,
+        "simulated_cost_s": 27.486576980044997,
+        "always_large_accuracy": 0.625,
+        "meets_target": true
+      },
+      "matrix_factorization": {
+        "threshold": 0.9,
+        "subset": "calibration-val",
+        "n": 120,
+        "simulated_accuracy": 0.6083333333333333,
+        "simulated_cost_s": 37.50948555351667,
+        "always_large_accuracy": 0.6333333333333333,
+        "meets_target": true
+      }
+    }
+  }
+}
