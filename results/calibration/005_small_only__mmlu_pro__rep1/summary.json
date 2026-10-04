@@ -1,0 +1,73 @@
+{
+  "run_id": "005_small_only__mmlu_pro__rep1",
+  "strategy": "small_only",
+  "benchmark": "mmlu_pro",
+  "split": "train",
+  "n_queries": 600,
+  "n_correct": 321,
+  "accuracy": 0.535,
+  "accuracy_metric": "multiple_choice_accuracy",
+  "mean_latency_ms": 8962.282574842588,
+  "total_gpu_joules": null,
+  "mean_j_per_query": null,
+  "total_cpu_joules": null,
+  "cpu_summary_joules": null,
+  "mean_gpu_utilization_pct": null,
+  "mean_cpu_utilization_pct": null,
+  "peak_gpu_memory_mib": null,
+  "peak_system_memory_bytes": null,
+  "settings_fingerprint": "318ed61667c79691",
+  "energy_definition": "mean_j_per_query = total_gpu_joules / n_queries; total_gpu_joules integrates GPU*_POWER (mWatts) * Delta from the EnergiBridge --gpu CSV. cpu_summary_joules is the --summary line and is CPU only.",
+  "configuration": {
+    "settings_fingerprint": "318ed61667c79691",
+    "generation": {
+      "keep_alive": -1,
+      "num_ctx": 4096,
+      "think": false,
+      "logprobs": true,
+      "options": {
+        "temperature": 0,
+        "seed": 42
+      }
+    },
+    "max_new_tokens": 1024,
+    "router": {
+      "router": "small_only",
+      "class": "FixedModelRouter",
+      "models": [
+        "qwen3.5:4b",
+        "qwen3.5:9b",
+        "qwen3.5:27b"
+      ],
+      "model": "qwen3.5:4b"
+    },
+    "data_file": "/home/gl_teamx/GreenLabTeamX/data/mmlu_pro_train.jsonl",
+    "data_sha256": "e9f4a1e4c2e09ea9c0dbdc79b5823ea127700c0c2a25a237919e8ec884b3df35"
+  },
+  "hardware": {
+    "hostname": "glg2",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX 4000 Ada Generation",
+        "temperature_c": 35.0,
+        "memory_used_mib": 15411.0,
+        "memory_total_mib": 20475.0,
+        "power_w": 14.18,
+        "utilization_pct": 0.0
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX 4000 Ada Generation",
+        "temperature_c": 36.0,
+        "memory_used_mib": 12692.0,
+        "memory_total_mib": 20475.0,
+        "power_w": 11.49,
+        "utilization_pct": 0.0
+      }
+    ],
+    "gpu_error": null
+  }
+}

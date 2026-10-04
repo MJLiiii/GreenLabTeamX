@@ -1,0 +1,54 @@
+{
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA RTX 4000 Ada Generation",
+      "temperature_c": 77.0,
+      "memory_used_mib": 15429.0,
+      "memory_total_mib": 20475.0,
+      "power_w": 127.1,
+      "utilization_pct": 69.0
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA RTX 4000 Ada Generation",
+      "temperature_c": 38.0,
+      "memory_used_mib": 12710.0,
+      "memory_total_mib": 20475.0,
+      "power_w": 11.88,
+      "utilization_pct": 0.0
+    }
+  ],
+  "processes": [
+    {
+      "gpu": 0,
+      "pid": 1433375,
+      "name": "/usr/local/lib/ollama/llama-server",
+      "used_memory_mib": 8952.0
+    },
+    {
+      "gpu": 0,
+      "pid": 1433448,
+      "name": "/usr/local/lib/ollama/llama-server",
+      "used_memory_mib": 6460.0
+    },
+    {
+      "gpu": 1,
+      "pid": 1433375,
+      "name": "/usr/local/lib/ollama/llama-server",
+      "used_memory_mib": 8254.0
+    },
+    {
+      "gpu": 1,
+      "pid": 1433508,
+      "name": "/usr/local/lib/ollama/llama-server",
+      "used_memory_mib": 3932.0
+    },
+    {
+      "gpu": 1,
+      "pid": 1433575,
+      "name": "/usr/local/lib/ollama/llama-server",
+      "used_memory_mib": 502.0
+    }
+  ]
+}

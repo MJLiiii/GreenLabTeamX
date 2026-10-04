@@ -1,6 +1,0 @@
-run_id,query_id,benchmark,split,category,router,final_model,models_called,num_generate_calls,extracted_answer,reference,correct,extraction_failed,truncated,started_at_ms,ended_at_ms,latency_s,routing_latency_s,prompt_tokens_total,completion_tokens_total,error
-always_small__gsm_hard,612,gsm_hard,eval,,always_small,qwen3.5:4b,qwen3.5:4b,1,21,-2184101.0,False,False,True,1790684617925,1790684626904,8.978873201005626,0.000552689001779072,96,768,
-always_small__gsm_hard,910,gsm_hard,eval,,always_small,qwen3.5:4b,qwen3.5:4b,1,-21599617,-21599617.0,True,False,False,1790684626904,1790684634062,7.158696408994729,0.00021638300677295774,103,617,
-always_small__gsm_hard,57,gsm_hard,eval,,always_small,qwen3.5:4b,qwen3.5:4b,1,50627678,15.0,False,False,False,1790684634062,1790684642903,8.840069890997256,0.00022809399524703622,106,759,
-always_small__gsm_hard,491,gsm_hard,eval,,always_small,qwen3.5:4b,qwen3.5:4b,1,1813027,1813027.0,True,False,False,1790684642903,1790684651664,8.761718089008355,0.00017745301011018455,114,753,
-always_small__gsm_hard,383,gsm_hard,eval,,always_small,qwen3.5:4b,qwen3.5:4b,1,45989937,45989937.0,True,False,False,1790684651665,1790684659429,7.7641420219879365,0.00017276298603974283,159,670,

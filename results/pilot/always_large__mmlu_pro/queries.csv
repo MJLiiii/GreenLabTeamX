@@ -1,6 +1,0 @@
-run_id,query_id,benchmark,split,category,router,final_model,models_called,num_generate_calls,extracted_answer,reference,correct,extraction_failed,truncated,started_at_ms,ended_at_ms,latency_s,routing_latency_s,prompt_tokens_total,completion_tokens_total,error
-always_large__mmlu_pro,1803,mmlu_pro,eval,law,always_large,qwen3.5:27b,qwen3.5:27b,1,J,J,True,False,False,1790684880427,1790684922448,42.021113702998264,0.0003322849952382967,523,780,
-always_large__mmlu_pro,2783,mmlu_pro,eval,psychology,always_large,qwen3.5:27b,qwen3.5:27b,1,I,I,True,False,False,1790684922449,1790684946340,23.890969190004398,0.00013764201139565557,140,446,
-always_large__mmlu_pro,4593,mmlu_pro,eval,chemistry,always_large,qwen3.5:27b,qwen3.5:27b,1,,G,False,True,True,1790684946340,1790685000877,54.53698152600555,0.0002721939963521436,249,1024,
-always_large__mmlu_pro,9176,mmlu_pro,eval,physics,always_large,qwen3.5:27b,qwen3.5:27b,1,,E,False,True,True,1790685000877,1790685055433,54.55587373700109,0.0001284320023842156,279,1024,
-always_large__mmlu_pro,178,mmlu_pro,eval,business,always_large,qwen3.5:27b,qwen3.5:27b,1,C,C,True,False,False,1790685055433,1790685087924,32.49141510699701,0.00015366298612207174,253,606,

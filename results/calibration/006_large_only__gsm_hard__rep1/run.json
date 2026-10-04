@@ -1,0 +1,37 @@
+{
+  "run_id": "006_large_only__gsm_hard__rep1",
+  "started_at": "2026-10-04T14:14:45+00:00",
+  "finished_at": null,
+  "router": {
+    "router": "large_only",
+    "class": "FixedModelRouter",
+    "models": [
+      "qwen3.5:4b",
+      "qwen3.5:9b",
+      "qwen3.5:27b"
+    ],
+    "model": "qwen3.5:27b"
+  },
+  "benchmark": "gsm_hard",
+  "split": "train",
+  "data_file": "/home/gl_teamx/GreenLabTeamX/data/gsm_hard_train.jsonl",
+  "data_sha256": "e57083bbdbfd2cede407a02d2b17957c1e4ca95d1ba39d7d57056e754c3768a3",
+  "num_questions": 600,
+  "settings_fingerprint": "318ed61667c79691",
+  "generation": {
+    "keep_alive": -1,
+    "num_ctx": 4096,
+    "think": false,
+    "logprobs": true,
+    "options": {
+      "temperature": 0,
+      "seed": 42
+    }
+  },
+  "max_new_tokens": 768,
+  "embedding_model": "nomic-embed-text:v1.5",
+  "ollama_url": "http://localhost:11434",
+  "client_timeout_s": 600,
+  "python_version": "3.12.3",
+  "hostname": "glg2"
+}
