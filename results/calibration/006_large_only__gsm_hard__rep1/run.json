@@ -1,7 +1,7 @@
 {
   "run_id": "006_large_only__gsm_hard__rep1",
-  "started_at": "2026-10-04T14:14:45+00:00",
-  "finished_at": null,
+  "started_at": "2026-10-05T11:14:26+00:00",
+  "finished_at": "2026-10-05T16:13:12+00:00",
   "router": {
     "router": "large_only",
     "class": "FixedModelRouter",
@@ -33,5 +33,20 @@
   "ollama_url": "http://localhost:11434",
   "client_timeout_s": 600,
   "python_version": "3.12.3",
-  "hostname": "glg2"
+  "hostname": "glg2",
+  "summary": {
+    "questions": 600,
+    "errors": 0,
+    "accuracy": 0.6033333333333334,
+    "extraction_failed": 0,
+    "truncated": 196,
+    "final_models": {
+      "qwen3.5:27b": 600
+    },
+    "generate_calls": 600,
+    "model_reloads": 0,
+    "total_seconds": 17926.240988252,
+    "mean_latency_s": 29.876963159520006,
+    "mean_latency_ms": 29876.963159520004
+  }
 }

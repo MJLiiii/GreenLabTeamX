@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-04T16:49:15+00:00",
+  "created_at": "2026-10-05T17:44:28+00:00",
   "fingerprint": "318ed61667c79691",
   "quality_target": 0.95,
   "results": [
@@ -10,19 +10,19 @@
       "cascade": {
         "threshold": 0.0,
         "subset": "calibration",
-        "n": 164,
-        "simulated_accuracy": 0.6219512195121951,
-        "simulated_cost_s": 24.153618887670735,
-        "always_large_accuracy": 0.5853658536585366,
+        "n": 600,
+        "simulated_accuracy": 0.6316666666666667,
+        "simulated_cost_s": 19.25367199291,
+        "always_large_accuracy": 0.6033333333333334,
         "meets_target": true
       },
       "matrix_factorization": {
-        "threshold": 0.8,
+        "threshold": 0.34,
         "subset": "calibration-val",
-        "n": 33,
-        "simulated_accuracy": 0.5757575757575758,
-        "simulated_cost_s": 33.09279162136364,
-        "always_large_accuracy": 0.6060606060606061,
+        "n": 120,
+        "simulated_accuracy": 0.6583333333333333,
+        "simulated_cost_s": 10.2528493778,
+        "always_large_accuracy": 0.6833333333333333,
         "meets_target": true
       }
     },
