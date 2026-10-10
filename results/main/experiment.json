@@ -1,0 +1,59 @@
+{
+  "exp_id": "main",
+  "created_at": "2026-10-05T19:02:22+00:00",
+  "routers": [
+    "small_only",
+    "medium_only",
+    "large_only",
+    "cascade",
+    "matrix_factorization"
+  ],
+  "benchmarks": [
+    "mmlu_pro",
+    "gsm_hard"
+  ],
+  "split": "eval",
+  "reps": 5,
+  "limit": null,
+  "seed": 42,
+  "energy": true,
+  "cooldown_s": 60,
+  "warmup_s": 120,
+  "idle_s": 60,
+  "thresholds": {
+    "cascade": null,
+    "mf": null
+  },
+  "energibridge": {
+    "path": "energibridge",
+    "interval_ms": 200,
+    "max_seconds": 21600
+  },
+  "settings_fingerprint": "318ed61667c79691",
+  "hardware": {
+    "hostname": "glg2",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX 4000 Ada Generation",
+        "temperature_c": 31.0,
+        "memory_used_mib": 15427.0,
+        "memory_total_mib": 20475.0,
+        "power_w": 7.17,
+        "utilization_pct": 0.0
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX 4000 Ada Generation",
+        "temperature_c": 34.0,
+        "memory_used_mib": 12716.0,
+        "memory_total_mib": 20475.0,
+        "power_w": 11.56,
+        "utilization_pct": 0.0
+      }
+    ],
+    "gpu_error": null
+  }
+}

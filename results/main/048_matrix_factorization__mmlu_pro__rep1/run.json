@@ -1,0 +1,58 @@
+{
+  "run_id": "048_matrix_factorization__mmlu_pro__rep1",
+  "started_at": "2026-10-09T18:39:36+00:00",
+  "finished_at": "2026-10-09T20:48:28+00:00",
+  "router": {
+    "router": "matrix_factorization",
+    "class": "MatrixFactorizationRouter",
+    "models": [
+      "qwen3.5:4b",
+      "qwen3.5:9b",
+      "qwen3.5:27b"
+    ],
+    "threshold": 0.9,
+    "rank": 16,
+    "embedding_model": "nomic-embed-text:v1.5",
+    "artifact": "/home/gl_teamx/GreenLabTeamX/artifacts/mf_mmlu_pro.npz",
+    "benchmark": "mmlu_pro"
+  },
+  "benchmark": "mmlu_pro",
+  "split": "eval",
+  "data_file": "/home/gl_teamx/GreenLabTeamX/data/mmlu_pro_eval.jsonl",
+  "data_sha256": "1ba763d441e243d5c7e1ce3550f8f841455eb144cf5bd52a4cd4d83f47a37928",
+  "num_questions": 200,
+  "settings_fingerprint": "318ed61667c79691",
+  "generation": {
+    "keep_alive": -1,
+    "num_ctx": 4096,
+    "think": false,
+    "logprobs": true,
+    "options": {
+      "temperature": 0,
+      "seed": 42
+    }
+  },
+  "max_new_tokens": 1024,
+  "embedding_model": "nomic-embed-text:v1.5",
+  "ollama_url": "http://localhost:11434",
+  "client_timeout_s": 600,
+  "python_version": "3.12.3",
+  "hostname": "glg2",
+  "summary": {
+    "questions": 200,
+    "errors": 0,
+    "accuracy": 0.555,
+    "extraction_failed": 61,
+    "truncated": 61,
+    "final_models": {
+      "qwen3.5:27b": 180,
+      "qwen3.5:4b": 7,
+      "qwen3.5:9b": 13
+    },
+    "generate_calls": 200,
+    "model_reloads": 0,
+    "total_seconds": 7732.007930019987,
+    "mean_latency_s": 38.65991008587909,
+    "mean_latency_ms": 38659.91008587909
+  }
+}

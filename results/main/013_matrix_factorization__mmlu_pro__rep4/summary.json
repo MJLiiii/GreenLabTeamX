@@ -1,0 +1,77 @@
+{
+  "run_id": "013_matrix_factorization__mmlu_pro__rep4",
+  "strategy": "matrix_factorization",
+  "benchmark": "mmlu_pro",
+  "split": "eval",
+  "n_queries": 200,
+  "n_correct": 113,
+  "accuracy": 0.565,
+  "accuracy_metric": "multiple_choice_accuracy",
+  "mean_latency_ms": 38219.47637774865,
+  "total_gpu_joules": 1308400.9761579935,
+  "mean_j_per_query": 6542.0048807899675,
+  "total_cpu_joules": 771376.2761077881,
+  "cpu_summary_joules": 771359.2137298584,
+  "mean_gpu_utilization_pct": 48.290466096150325,
+  "mean_cpu_utilization_pct": 27.047308888506784,
+  "peak_gpu_memory_mib": 15905.0,
+  "peak_system_memory_bytes": 33245675520.0,
+  "settings_fingerprint": "318ed61667c79691",
+  "energy_definition": "mean_j_per_query = total_gpu_joules / n_queries; total_gpu_joules integrates GPU*_POWER (mWatts) * Delta from the EnergiBridge --gpu CSV. cpu_summary_joules is the --summary line and is CPU only.",
+  "configuration": {
+    "settings_fingerprint": "318ed61667c79691",
+    "generation": {
+      "keep_alive": -1,
+      "num_ctx": 4096,
+      "think": false,
+      "logprobs": true,
+      "options": {
+        "temperature": 0,
+        "seed": 42
+      }
+    },
+    "max_new_tokens": 1024,
+    "router": {
+      "router": "matrix_factorization",
+      "class": "MatrixFactorizationRouter",
+      "models": [
+        "qwen3.5:4b",
+        "qwen3.5:9b",
+        "qwen3.5:27b"
+      ],
+      "threshold": 0.9,
+      "rank": 16,
+      "embedding_model": "nomic-embed-text:v1.5",
+      "artifact": "/home/gl_teamx/GreenLabTeamX/artifacts/mf_mmlu_pro.npz",
+      "benchmark": "mmlu_pro"
+    },
+    "data_file": "/home/gl_teamx/GreenLabTeamX/data/mmlu_pro_eval.jsonl",
+    "data_sha256": "1ba763d441e243d5c7e1ce3550f8f841455eb144cf5bd52a4cd4d83f47a37928"
+  },
+  "hardware": {
+    "hostname": "glg2",
+    "platform": "Linux-6.8.0-142-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA RTX 4000 Ada Generation",
+        "temperature_c": 31.0,
+        "memory_used_mib": 15427.0,
+        "memory_total_mib": 20475.0,
+        "power_w": 7.17,
+        "utilization_pct": 0.0
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA RTX 4000 Ada Generation",
+        "temperature_c": 34.0,
+        "memory_used_mib": 12716.0,
+        "memory_total_mib": 20475.0,
+        "power_w": 11.56,
+        "utilization_pct": 0.0
+      }
+    ],
+    "gpu_error": null
+  }
+}

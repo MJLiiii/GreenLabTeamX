@@ -1,0 +1,54 @@
+{
+  "run_id": "054_cascade__gsm_hard__rep1",
+  "started_at": "2026-10-10T02:24:28+00:00",
+  "finished_at": "2026-10-10T03:39:40+00:00",
+  "router": {
+    "router": "cascade",
+    "class": "CascadeRouter",
+    "models": [
+      "qwen3.5:4b",
+      "qwen3.5:9b",
+      "qwen3.5:27b"
+    ],
+    "threshold": 0.0
+  },
+  "benchmark": "gsm_hard",
+  "split": "eval",
+  "data_file": "/home/gl_teamx/GreenLabTeamX/data/gsm_hard_eval.jsonl",
+  "data_sha256": "32df4f8eac97573923897f8a6a36e44ff67a1f20285d8b055ecccd902cac7556",
+  "num_questions": 200,
+  "settings_fingerprint": "318ed61667c79691",
+  "generation": {
+    "keep_alive": -1,
+    "num_ctx": 4096,
+    "think": false,
+    "logprobs": true,
+    "options": {
+      "temperature": 0,
+      "seed": 42
+    }
+  },
+  "max_new_tokens": 768,
+  "embedding_model": "nomic-embed-text:v1.5",
+  "ollama_url": "http://localhost:11434",
+  "client_timeout_s": 600,
+  "python_version": "3.12.3",
+  "hostname": "glg2",
+  "summary": {
+    "questions": 200,
+    "errors": 0,
+    "accuracy": 0.55,
+    "extraction_failed": 0,
+    "truncated": 48,
+    "final_models": {
+      "qwen3.5:27b": 56,
+      "qwen3.5:4b": 125,
+      "qwen3.5:9b": 19
+    },
+    "generate_calls": 331,
+    "model_reloads": 0,
+    "total_seconds": 4512.210182100011,
+    "mean_latency_s": 22.56088362351613,
+    "mean_latency_ms": 22560.883623516133
+  }
+}
