@@ -1,8 +1,8 @@
 # 最终交付索引 / Final delivery index
 
-中文：链接按拟上传后的仓库路径解析。原始输入不在包内，按位置说明取得后才能全量运行。完整文件路径及SHA-256见file_index.csv。
+中文：以下链接为已发布仓库布局。原始输入通过独立Release附件取得，按说明准备后才能全量运行。file_index.csv保留原交付快照路径和传输SHA-256，不作为本次更新说明的当前哈希；历史核验文件保留原意。
 
-English: Links resolve against the proposed repository layout. Original inputs are excluded and must be obtained as instructed before a full run. Full file paths and SHA-256 are in file_index.csv.
+English: Links follow the published repository layout. Raw inputs are distributed as separate Release assets and must be prepared as instructed before a full run. file_index.csv retains original delivery-snapshot paths/transfer SHA-256, not current hashes of these updated instructions; historical verification records retain their original meaning.
 
 | 文件 / File | 内容 / Contents |
 |---|---|
@@ -39,15 +39,15 @@ English: Links resolve against the proposed repository layout. Original inputs a
 
 ## 原始归档与字节保留 / Raw archive and byte preservation
 
-中文：原始ZIP仅作为待授权Release附件，不在Git文件树中；下载链接尚未产生。以下为仓库内的说明与校验记录。
+中文：原始ZIP已作为[Release](https://github.com/MJLiiii/GreenLabTeamX/releases/tag/assignment3-reproducibility-v1.0.0)附件发布，不在Git文件树中：[下载ZIP](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip)、[下载SHA-256侧车](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/raw_archive.sha256)。2026-10-18实际下载核验通过；标签提交为`db646bf8fade1c43466e6986e62ad3a54df2336a`，未移动。以下为仓库内说明及历史成员校验记录；没有重跑分析或验证跨机器数值复现。
 
-English: The raw ZIP is a pending authorized Release asset, not a Git-tree file; no download link exists. Repository guidance/check records are listed below.
+English: The raw ZIP is published as a [Release](https://github.com/MJLiiii/GreenLabTeamX/releases/tag/assignment3-reproducibility-v1.0.0) asset outside the Git tree: [download ZIP](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip), [download SHA-256 sidecar](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/raw_archive.sha256). Actual downloads passed verification on 2026-10-18; the tag remains at `db646bf8fade1c43466e6986e62ad3a54df2336a`. Repository guidance and historical member checks follow; no analysis rerun or cross-machine numerical reproduction was performed.
 
 | 文件 / File | 内容 / Contents |
 |---|---|
-| [归档元数据](raw_archive.json) | 名称、大小、SHA-256及待分发状态 / Name, size, SHA-256 and pending distribution |
-| [归档SHA-256](raw_archive.sha256) | 同时拟作为Release校验附件 / Also a proposed Release checksum asset |
+| [归档元数据](raw_archive.json) | 名称、大小、SHA-256及已发布状态 / Name, size, SHA-256 and published status |
+| [归档SHA-256](raw_archive.sha256) | 同时已发布为Release校验附件 / Also published as the Release checksum asset |
 | [261项既有校验](verification/raw_archive_verification.csv) | 复用先前解压流结果 / Reused decompressed-member verification |
 | [字节保留说明](byte_preservation.md) | 解压位置、校验方法及25路径范围 / Extraction, verification and25-path scope |
 | [离线归档校验工具](tools/verify_raw_archive.py) | 无分析的独立校验 / Independent verification without analysis |
-| [属性拟稿目标](../../.gitattributes) | 本轮未应用；审批后才纳入 / Unapplied; inclusion requires approval |
+| [已纳入的属性规则](../../.gitattributes) | 25路径规则；本次未改动 / Published25-path rules; unchanged in this update |

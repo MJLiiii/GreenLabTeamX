@@ -2,15 +2,15 @@
 
 ## 归档与当前状态 / Archive and current status
 
-中文：归档`GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip`，233,299,533字节；SHA-256：`a80b2f7bcb059276eb8fea46d7944b7c698d0f1a454eb46aebb7da0c61a8294b`。261个条目的解压字节共1,302,464,394字节，逐项符合原input_hashes.csv。只用二进制读取与复制；没有解析、重写CSV/JSON、转换编码或换行。原始manifest.csv是261项之一；归档不附带新说明或校验产物。附件独立分发，不默认纳入普通Git历史，尚未上传或提供URL。
+中文：归档`GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip`，233,299,533字节；SHA-256：`a80b2f7bcb059276eb8fea46d7944b7c698d0f1a454eb46aebb7da0c61a8294b`。261个条目的解压字节共1,302,464,394字节，逐项符合原input_hashes.csv。只用二进制读取与复制；没有解析、重写CSV/JSON、转换编码或换行。原始manifest.csv是261项之一；归档不附带新说明或校验产物。附件已在[Release](https://github.com/MJLiiii/GreenLabTeamX/releases/tag/assignment3-reproducibility-v1.0.0)发布：[ZIP](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip)、[SHA-256侧车](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/raw_archive.sha256)；不进入普通Git历史。2026-10-18实际下载均为HTTP 200，ZIP大小与批准SHA-256一致，侧车文件名和哈希正确；本次未解压或重复成员核验。标签固定于`db646bf8fade1c43466e6986e62ad3a54df2336a`，文档补链不移动标签。
 
-English: Archive `GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip` is 233,299,533 bytes; SHA-256 `a80b2f7bcb059276eb8fea46d7944b7c698d0f1a454eb46aebb7da0c61a8294b`. The261 decompressed files total1,302,464,394 bytes and individually match original input_hashes.csv. Only binary reads/copies were used: no CSV/JSON payload parsing, rewriting, encoding or newline conversion. Original manifest.csv is one of the261 inputs; no new documentation/verification outputs are inside. This is a separate distribution attachment, not ordinary Git history, and has not been uploaded or assigned a URL.
+English: Archive `GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip` is 233,299,533 bytes; SHA-256 `a80b2f7bcb059276eb8fea46d7944b7c698d0f1a454eb46aebb7da0c61a8294b`. The261 decompressed files total1,302,464,394 bytes and individually match original input_hashes.csv. Only binary reads/copies were used: no CSV/JSON payload parsing, rewriting, encoding or newline conversion. Original manifest.csv is one of the261 inputs; no new documentation/verification outputs are inside. The assets are published on the [Release](https://github.com/MJLiiii/GreenLabTeamX/releases/tag/assignment3-reproducibility-v1.0.0): [ZIP](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip) and [SHA-256 sidecar](https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/raw_archive.sha256), outside ordinary Git history. Actual downloads on 2026-10-18 returned HTTP 200; ZIP size/approved SHA-256 and sidecar filename/hash matched. No extraction or repeat member check was performed. The tag remains fixed at `db646bf8fade1c43466e6986e62ad3a54df2336a` despite this documentation follow-up.
 
 ## 取得后的校验与解压 / Verification and extraction after acquisition
 
-中文：先由授权分发取得ZIP与可信校验值。以下PowerShell命令是供取得后的使用者执行的说明，本轮未执行向磁盘解压。项目根目录应包含可移植入口与批准清单；results/main必须不存在。Python校验工具仅使用标准库，是可选独立归档检查工具，不是R分析的新依赖。
+中文：使用上方Release附件链接下载ZIP和侧车，并与本页批准哈希核对，不能只信任随包侧车。以下PowerShell命令是供取得后的使用者执行的说明，本轮未执行向磁盘解压。项目根目录应包含可移植入口与批准清单；results/main必须不存在。Python校验工具仅使用标准库，是可选独立归档检查工具，不是R分析的新依赖。
 
-English: Obtain the ZIP and trusted checksum through authorized distribution. These PowerShell commands are instructions for recipients; filesystem extraction was not performed in this task. The project root must contain the portable entry/approved manifest, with no existing results/main. The Python verifier uses only the standard library and is an optional independent archive tool, not a new R-analysis dependency.
+English: Download the ZIP and sidecar using the Release asset links above and compare against the approved hash on this page, rather than trusting only the accompanying sidecar. These PowerShell commands are instructions for recipients; filesystem extraction was not performed in this task. The project root must contain the portable entry/approved manifest, with no existing results/main. The Python verifier uses only the standard library and is an optional independent archive tool, not a new R-analysis dependency.
 
 ```powershell
 $projectRoot = "D:/path/to/GreenLabTeamX"
@@ -25,6 +25,12 @@ Import-Csv "$projectRoot/analysis/portable_20261018/static/input_hashes.csv" | F
   if ((Get-Item -LiteralPath $restoredFile).Length -ne [long]$_.bytes -or (Get-FileHash -LiteralPath $restoredFile -Algorithm SHA256).Hash.ToLowerInvariant() -ne $_.sha256) { throw "Restored file mismatch: $restoredFile" }
 }
 ```
+
+## 属性规则与历史审核的区分 / Applied rules versus historical review
+
+中文：根`.gitattributes`的25条精确路径规则已随发布提交纳入；本次文档PR不修改属性、代码或批准清单。下列三节保留归档准备阶段的历史核验记录，出现的“拟稿”“未应用”“未暂存”仅描述该阶段，不能视为当前发布状态。规则外文本仍可能换行转换；file_index.csv保留原交付快照哈希，不更新为本次说明哈希。
+
+English: The25 exact-path rules in root `.gitattributes` are included in the published commit; this documentation PR changes no attributes, code or approved manifests. The following three sections preserve checks from archive preparation: draft/unapplied/unstaged statements describe that historical stage, not current publication status. Text outside the rules can still undergo newline conversion; file_index.csv retains original delivery-snapshot hashes, rather than hashes of these updated instructions.
 
 ## 现有Git配置与风险 / Existing Git configuration and risk
 
