@@ -17,9 +17,28 @@
   "binary_copy_only": true,
   "csv_or_json_payloads_parsed_or_rewritten": false,
   "encoding_or_newlines_converted": false,
-  "distribution_status": "local_only_not_uploaded",
-  "normal_git_history_inclusion": "not_proposed",
-  "download_url": null,
+  "distribution_status": "published_release_download_verified",
+  "normal_git_history_inclusion": "excluded_release_attachment_only",
+  "download_url": "https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip",
   "note_zh": "独立分发附件；仅261个原始文件，无目录项、附加说明或清单混入ZIP。逐项验证解压流字节，不在原目录解压。",
-  "note_en": "Independent distribution attachment: only261 raw files, without directory entries, documentation or manifests added to ZIP. Decompressed member bytes verified in streams, without extracting into original directories."
+  "note_en": "Independent distribution attachment: only261 raw files, without directory entries, documentation or manifests added to ZIP. Decompressed member bytes verified in streams, without extracting into original directories.",
+  "checksum_download_url": "https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/raw_archive.sha256",
+  "release_url": "https://github.com/MJLiiii/GreenLabTeamX/releases/tag/assignment3-reproducibility-v1.0.0",
+  "release_tag": "assignment3-reproducibility-v1.0.0",
+  "release_commit": "db646bf8fade1c43466e6986e62ad3a54df2336a",
+  "release_published_at": "2026-10-18T01:19:25Z",
+  "download_verification": {
+    "checked_utc": "2026-10-18T01:24:23.656116+00:00",
+    "passed": true,
+    "zip_http_status": 200,
+    "zip_bytes": 233299533,
+    "zip_sha256": "a80b2f7bcb059276eb8fea46d7944b7c698d0f1a454eb46aebb7da0c61a8294b",
+    "checksum_http_status": 200,
+    "checksum_bytes": 123,
+    "checksum_sha256": "bf5ce0a8f74139ff6f89eba292d852193eb7793e35f2925e80224724b5f285c2",
+    "checksum_filename_and_hash_match": true,
+    "checksum_bytes_match_approved": true,
+    "archive_members_rechecked": false,
+    "analysis_rerun": false
+  }
 }
