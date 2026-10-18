@@ -1,0 +1,6 @@
+check_id,passed,detail
+"counts_keys",TRUE,"10000 query-repeat, 2000 question-strategy, 55 run, 5 idle; unique keys"
+"unique_energy_missing",TRUE,"Only approved 2 ms tail lacks complete energy; partial values never substituted; 1 cell n=4, 1999 n=5"
+"correct_latency_five",TRUE,"All correctness/latency retain five; majority at least three"
+"question_sets_repetitions",TRUE,"Benchmark-specific 200-question sets and five repetitions retained"
+"processing_reconciliation",TRUE,"Existing reconciliation invariants pass; no processing issues; exactly 48 known initialization duplicates"

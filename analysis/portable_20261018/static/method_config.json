@@ -1,0 +1,33 @@
+{
+  "alpha": 0.05,
+  "confidence_level": 0.95,
+  "hac_lags": [
+    5,
+    10,
+    20
+  ],
+  "hac_prewhite": false,
+  "hac_adjust": true,
+  "hac_critical_value": 1.96,
+  "family_sizes": {
+    "F_RQ1_ENERGY": 24,
+    "F_RQ11_ACCURACY": 12,
+    "F_RQ2_TRADEOFF": 6,
+    "F_RQ3_LATENCY": 12
+  },
+  "target": "conditional_on_recorded_runs_fixed_configuration_frozen_question_mix",
+  "alternative": "two.sided",
+  "pairing_key": [
+    "benchmark",
+    "query_id"
+  ],
+  "missing_rule": "retain_200_questions_with_approved_4_repeat_small_only_mmlu_query3030_energy_mean",
+  "accuracy_method": "exact_binomial_mcnemar",
+  "accuracy_ci": "Newcombe_1998_method10_corrected_positive_phi_ordinary_Wilson_marginals",
+  "hac_kernel": "Bartlett",
+  "hac_order": "source_query_record_index",
+  "ci_multiplicity": "unadjusted_pointwise",
+  "effect_continuous": "mean(D);100*mean(D)/mean(B);Cohen_dz=mean(D)/sd(D)",
+  "effect_accuracy": "100*(b-c)/n_percentage_points",
+  "post_data_plan": true
+}

@@ -1,0 +1,6 @@
+original,bound,occurrences,function_name
+"analysis/validation/audit_20261017/run_validation.csv","analysis/portable_20261018/static/initialization_registry.csv",1,"process_all"
+"analysis/descriptive_20261017/planned_comparisons.csv","analysis/portable_20261018/static/comparison_plan.csv",3,"run_sensitivity_stage"
+"analysis/descriptive_20261017/planned_comparisons.csv","analysis/portable_20261018/static/comparison_plan.csv",1,"run_inference_stage"
+"analysis/descriptive_outputs_20261017_01/planned_comparisons.csv","analysis/portable_20261018/static/comparison_plan.csv",1,"run_inference_stage"
+"analysis/inference_outputs_20261017_02/inference_config.json","analysis/portable_20261018/static/method_config.json",1,"run_inference_stage"

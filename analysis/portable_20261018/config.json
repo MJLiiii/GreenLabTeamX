@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "packages": [
+    "data.table",
+    "ggplot2",
+    "jsonlite",
+    "digest",
+    "sandwich",
+    "zoo"
+  ],
+  "asset_manifest": "analysis/portable_20261018/static/assets.csv",
+  "asset_manifest_sha256": "c35c659d22b81301b9f8341ee3cdb54904b6223c2bd3d9044d0bf914ed85bfb6",
+  "static_directory": "analysis/portable_20261018/static",
+  "absolute_tolerance": 1e-10,
+  "relative_tolerance": 1e-10,
+  "near_zero_p_absolute_tolerance": 1e-15,
+  "near_zero_p_relative_tolerance": 1e-09
+}

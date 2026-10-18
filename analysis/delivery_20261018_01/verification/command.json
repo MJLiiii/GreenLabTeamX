@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Program Files\\R\\R-4.6.1\\bin\\Rscript.exe",
+    "--vanilla",
+    "analysis/portable_20261018/main.R",
+    "--root",
+    "C:/Users/surface/Desktop/GreenLabTeamX",
+    "--out",
+    "analysis/portable_reproduced_20261018_01",
+    "--compare-history",
+    "--reference",
+    "analysis/reproduced_20261018_03"
+  ],
+  "cwd": "C:/Users/surface/Desktop/GreenLabTeamX",
+  "log_policy": "Capture outside project; copy only after R exits and its protection finishes",
+  "protected_existing_files": 1573
+}

@@ -1,0 +1,28 @@
+# DRAFT ONLY: exact approved runtime paths; not applied.
+# Preserve raw bytes: no EOL conversion, clean/smudge filter, ident or encoding conversion.
+# Scope:24 runtime assets/config/entry files and one delivery hash index; no raw-data globs.
+/analysis/delivery_20261018_01/file_index.csv -text !eol -filter -ident !working-tree-encoding
+/analysis/descriptive_20261017/figures.R -text !eol -filter -ident !working-tree-encoding
+/analysis/descriptive_20261017/tables.R -text !eol -filter -ident !working-tree-encoding
+/analysis/diagnostics_20261017/core.R -text !eol -filter -ident !working-tree-encoding
+/analysis/inference_20261017/accuracy_methods.R -text !eol -filter -ident !working-tree-encoding
+/analysis/inference_20261017/continuous_core.R -text !eol -filter -ident !working-tree-encoding
+/analysis/inference_20261017/figures_corrected.R -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/adapters.R -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/config.json -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/entry.R -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/main.R -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/pipeline.R -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/runtime.R -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/static/assets.csv -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/static/comparison_plan.csv -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/static/initialization_registry.csv -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/static/input_hashes.csv -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/static/method_config.json -text !eol -filter -ident !working-tree-encoding
+/analysis/portable_20261018/static/provenance.json -text !eol -filter -ident !working-tree-encoding
+/analysis/processing_20261017_r/process.R -text !eol -filter -ident !working-tree-encoding
+/analysis/processing_20261017_r/support.R -text !eol -filter -ident !working-tree-encoding
+/analysis/reproduction_20261018/checks.R -text !eol -filter -ident !working-tree-encoding
+/analysis/reproduction_20261018/descriptive_stage.R -text !eol -filter -ident !working-tree-encoding
+/analysis/reproduction_20261018/inference_stage.R -text !eol -filter -ident !working-tree-encoding
+/analysis/reproduction_20261018/sensitivity_stage.R -text !eol -filter -ident !working-tree-encoding
