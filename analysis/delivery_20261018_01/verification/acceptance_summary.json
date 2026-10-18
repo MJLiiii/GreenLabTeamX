@@ -1,0 +1,59 @@
+{
+  "r_exit_code": 0,
+  "query_rows": 10000,
+  "question_summary_rows": 2000,
+  "run_rows": 55,
+  "idle_rows": 5,
+  "complete_energy_rows": 9999,
+  "missing_complete_energy_rows": 1,
+  "unique_approved_missing_preserved": true,
+  "energy_n_valid_distribution": {
+    "gpu_trapezoid_j": {
+      "5": 1999,
+      "4": 1
+    },
+    "gpu_left_j": {
+      "5": 1999,
+      "4": 1
+    },
+    "cpu_j": {
+      "5": 1999,
+      "4": 1
+    }
+  },
+  "accuracy_all_five": true,
+  "latency_all_five": true,
+  "primary_comparisons": 54,
+  "primary_success": 54,
+  "hac_records": 120,
+  "hac_success": 120,
+  "sensitivity_point_estimates": 420,
+  "sensitivity_specifications": 60,
+  "reference_tables": 24,
+  "field_comparisons": 733,
+  "all_field_comparisons_passed": true,
+  "maximum_absolute_numeric_difference": 0.0,
+  "holm_decisions_identical": true,
+  "integration_gates_passed": true,
+  "required_raw_inputs": 261,
+  "required_raw_hashes_passed": true,
+  "current_stage_lineage_checks": 6,
+  "current_stage_lineage_passed": true,
+  "png_comparisons": 30,
+  "png_byte_identical": 30,
+  "pdf_comparisons": 30,
+  "pdf_byte_identical": 0,
+  "pdf_identical_except_date_metadata": 30,
+  "figures_requiring_actual_inspection": 0,
+  "r_protection_passed": true,
+  "r_protected_files": 1577,
+  "r_completion": {
+    "completed": true,
+    "protection_passed": true,
+    "history_comparison_requested": true
+  },
+  "historical_tests_reexecuted": false,
+  "new_experiments": false,
+  "cross_machine_verified": false,
+  "passed": true
+}

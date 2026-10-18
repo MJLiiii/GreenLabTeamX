@@ -1,0 +1,29 @@
+{
+  "checked_utc": "2026-10-18T00:24:06.994702+00:00",
+  "remote_url": "https://github.com/MJLiiii/GreenLabTeamX.git",
+  "default_branch": "main",
+  "fixed_commit": "8f3765b00a646e1288f4ad6e657a82a3dbf89e61",
+  "root_tree": "2a8a8bdafd25f4d5a5755613c07f92c1281f5e83",
+  "ls_remote_exit_code": 0,
+  "ls_remote_evidence": "ls_remote_observed.txt",
+  "initial_access_failure": "Sandbox GitHub HTTPS proxy 127.0.0.1 unreachable; not interpreted as missing remote files",
+  "successful_access": "Read-only git ls-remote outside sandbox returned main and the fixed commit",
+  "remote_evidence_method": "Advertised remote commit equals existing local immutable commit; commit and relevant tree IDs recomputed. Read its tree/blob IDs using cat-file/ls-tree without fetch, replacement objects or Git writes.",
+  "commit_object_sha1_verified": true,
+  "tree_objects_verified": 58,
+  "git_object_format": "sha1",
+  "local_sha256_compared_only_to_input_manifest": true,
+  "raw_files_checked": 261,
+  "statuses": {
+    "identical_git_blob": 101,
+    "different_bytes_lf_equivalent": 160
+  },
+  "all_local_manifest_hashes_passed": true,
+  "all_261_remote_bytes_identical": false,
+  "remote_api_or_payload_downloads_performed": false,
+  "individual_HTTP_URL_statuses_checked": false,
+  "remote_access_failures_counted_as_missing": false,
+  "git_writes_performed": false,
+  "note_zh": "LF等价仅解释字节差异，不把不同字节写成一致；不改变输入哈希或原文件。",
+  "note_en": "LF equivalence explains byte differences only; differing bytes are not called identical. No input hashes or original files are changed."
+}

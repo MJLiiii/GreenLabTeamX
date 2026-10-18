@@ -1,0 +1,8 @@
+n,n_missing,mean,median,sd,variance,min,max,metric,unit,level,denominator,source_table
+5,0,2927.14018249512,2878.51736450195,138.583321322789,19205.3369488553,2843.13615417481,3173.63032531738,"cpu_j","J","between_five_idle_runs","idle_runs","idle_summary.csv"
+5,0,60.0932,60.097,0.00849705831449846,7.21999999999875e-05,60.078,60.097,"effective_duration_s","s","between_five_idle_runs","idle_runs","idle_summary.csv"
+5,0,1249.8569482,1250.746759,18.3950228947696,338.376867299096,1224.448829,1275.597386,"gpu_left_j","J","between_five_idle_runs","idle_runs","idle_summary.csv"
+5,0,1249.802146,1250.6795695,18.3929757721467,338.301557754774,1224.4035525,1275.54963,"gpu_trapezoid_j","J","between_five_idle_runs","idle_runs","idle_summary.csv"
+5,0,48.7102670370579,47.8978545435205,2.31342039787475,5.35191393730297,47.3091194930663,52.8251660394384,"mean_cpu_w","W","between_five_idle_runs","idle_runs","idle_summary.csv"
+5,0,20.798615503998,20.8121330349269,0.303869346793845,0.0923365799209182,20.38098520257,21.2256416460056,"mean_gpu_left_w","W","between_five_idle_runs","idle_runs","idle_summary.csv"
+5,0,20.7977035605768,20.8110150173886,0.303835956533205,0.0923162884824474,20.3802315739539,21.2248469973543,"mean_gpu_trapezoid_w","W","between_five_idle_runs","idle_runs","idle_summary.csv"

@@ -120,3 +120,9 @@ python -m unittest discover -s tests -t .
 - **EnergiBridge summary.** The summary joules (`eb_summary_joules` in the manifest) are **CPU only**: in the pilot they matched the `CPU_ENERGY (J)` counter, and they leave out the GPUs. The primary energy metric, `mean_j_per_query`, integrates `GPU*_POWER (mW)` × `Delta` from `energy.csv` and divides by the number of evaluated queries. The summary line is also missing when the command fails.
 - **Model placement.** Ollama splits `qwen3.5:27b` over both GPUs even when it is loaded alone. The placement is the same after every reload and is recorded in the manifest.
 - **Shared machine.** EnergiBridge measures the whole machine, so reserve it while an experiment runs.
+
+## 已完成分析与复现 / Completed analysis and reproduction
+
+中文：已完成的分析、此前通过的本地全量复现与运行命令见[交付说明](analysis/delivery_20261018_01/README.md)及[最终索引](analysis/delivery_20261018_01/final_index.md)。推荐[可移植R入口](analysis/portable_20261018/main.R)，无需重做实验。261项字节不变原始ZIP已在本地制作，但Release与下载链接尚待授权；[归档信息](analysis/delivery_20261018_01/raw_archive.json)和[字节保留说明](analysis/delivery_20261018_01/byte_preservation.md)说明取得、另建工作目录解压及Git换行限制。没有宣称跨机器验证。
+
+English: Completed analysis, previously passed local full reproduction and commands are in the [delivery guide](analysis/delivery_20261018_01/README.md) and [final index](analysis/delivery_20261018_01/final_index.md). Use the [portable R entry](analysis/portable_20261018/main.R), without new experiments. A byte-exact261-file raw ZIP now exists locally, but Release/download links await authorization. See [archive metadata](analysis/delivery_20261018_01/raw_archive.json) and [byte-preservation guidance](analysis/delivery_20261018_01/byte_preservation.md) for acquisition, extraction into a separate workspace and Git newline limits. Cross-machine validation is not claimed.

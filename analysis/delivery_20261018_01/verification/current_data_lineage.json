@@ -1,0 +1,38 @@
+[
+  {
+    "path": "analysis/portable_reproduced_20261018_01/processing/query_metrics.csv",
+    "sha256": "290781ca0fd248f886c2f7ad15a6ad8e8bef8779e40686909cd48f8d61bb3ab0",
+    "role": "current_processing_queries",
+    "passed": true
+  },
+  {
+    "path": "analysis/portable_reproduced_20261018_01/processing/question_summary.csv",
+    "sha256": "e42f6c723364d5134677b5d60789eb1539bb07741dff69b18f53280394263f57",
+    "role": "current_processing_question_means",
+    "passed": true
+  },
+  {
+    "path": "analysis/portable_reproduced_20261018_01/sensitivity/sensitivity_point_estimates.csv",
+    "sha256": "a692e4cfe33d628907ce261b729c12c9b18ad2172e67796d137cee73e73f3269",
+    "role": "current_sensitivity_point_estimates",
+    "passed": true
+  },
+  {
+    "role": "new_query_metrics",
+    "path": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/portable_reproduced_20261018_01/processing/query_metrics.csv",
+    "sha256": "290781ca0fd248f886c2f7ad15a6ad8e8bef8779e40686909cd48f8d61bb3ab0",
+    "passed": true
+  },
+  {
+    "role": "new_question_summary",
+    "path": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/portable_reproduced_20261018_01/processing/question_summary.csv",
+    "sha256": "e42f6c723364d5134677b5d60789eb1539bb07741dff69b18f53280394263f57",
+    "passed": true
+  },
+  {
+    "role": "new_run_reconciliation",
+    "path": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/portable_reproduced_20261018_01/processing/run_reconciliation.csv",
+    "sha256": "4e81574dcb9f02c4edd47f1495556ad440961d381aae5b0a48fee52030170ee3",
+    "passed": true
+  }
+]

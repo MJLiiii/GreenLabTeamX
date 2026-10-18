@@ -1,0 +1,8 @@
+{
+  "command": ["C:\\PROGRA~1\\R\\R-46~1.1\\bin\\x64\\Rterm.exe", "--no-echo", "--no-restore", "--vanilla", "--file=analysis/portable_20261018/main.R", "--args", "--root", "C:/Users/surface/Desktop/GreenLabTeamX", "--out", "analysis/portable_reproduced_20261018_01", "--compare-history", "--reference", "analysis/reproduced_20261018_03"],
+  "lib_paths": ["C:/Users/surface/AppData/Local/R/win-library/4.6", "C:/Program Files/R/R-4.6.1/library"],
+  "root": "C:/Users/surface/Desktop/GreenLabTeamX",
+  "output": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/portable_reproduced_20261018_01",
+  "historical_comparison": true,
+  "reference": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/reproduced_20261018_03"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "pass",
+  "stage": "approved_sensitivity_point_estimates_only",
+  "specifications": 60,
+  "scenarios": 420,
+  "whole_run_scenarios": 400,
+  "generated_from_new_processing": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/portable_reproduced_20261018_01/processing",
+  "static_specification": "C:/Users/surface/Desktop/GreenLabTeamX/analysis/portable_20261018/static/comparison_plan.csv",
+  "reused_helpers": ["diag_pair", "diag_metric_values", "diag_sensitivity", "diag_assert"],
+  "historical_numeric_sensitivity_output_read": false,
+  "complete_diagnostics_executed": false,
+  "historical_tests_executed": false,
+  "inference_executed": false,
+  "source_input_hashes_unchanged": true,
+  "output_sha256": "a692e4cfe33d628907ce261b729c12c9b18ad2172e67796d137cee73e73f3269",
+  "relative_change_rule": "abs(reference)>max(1e-8,0.01*mean((abs(A)+abs(B))/2))",
+  "mmlu_small_energy_run_omission_rule": "exclude_query3030_both_sides;199_question_all_run_reference;omit_one_actual_run_on_one_side_only",
+  "created_utc": "2026-10-18T00:05:53Z"
+}

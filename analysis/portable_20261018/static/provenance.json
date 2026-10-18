@@ -1,0 +1,61 @@
+{
+  "source_paths_are_provenance_only_not_runtime_requirements": true,
+  "sources": [
+    {
+      "destination": "static/comparison_plan.csv",
+      "source": "analysis/descriptive_20261017/planned_comparisons.csv",
+      "source_sha256": "38c2b30a4b416cdc847272faabb7a5fd3a720e4d6cecdf278d9e328e3802a116",
+      "extracted_sha256": "38c2b30a4b416cdc847272faabb7a5fd3a720e4d6cecdf278d9e328e3802a116"
+    },
+    {
+      "destination": "static/method_config.json",
+      "source": "analysis/inference_outputs_20261017_02/inference_config.json",
+      "source_sha256": "d9f56a57fb9f8e98b214c1bdb79300abd4decc19066f0e590f9cce74e33093a5",
+      "extracted_sha256": "912bbe688fee1e91b17e583d7410a784827f0888e81e752ab5180c086a9332cd"
+    },
+    {
+      "destination": "static/initialization_registry.csv",
+      "source": "analysis/validation/audit_20261017/run_validation.csv",
+      "source_sha256": "6ad670be261fef9d2017d1fc9400c4174ec258f08119b86febaf198ed8c46b9f",
+      "extracted_sha256": "9ef598257d8bac39fc7f4e4414f1d4ba3442a821a7fb08571c687b17ebde7054"
+    },
+    {
+      "destination": "static/input_hashes.csv",
+      "source": "analysis/outputs_20261017_02/source_manifest.csv",
+      "source_sha256": "83ab28a63a99281e40f243eb3952b959e5397e7dc8084b92097377d2b4dc02ac",
+      "extracted_sha256": "57b351fca1866a6d1c590d166ccf39c3be65d59530254ef83e782dcaed458fde"
+    }
+  ],
+  "checks": {
+    "plan_byte_identical": true,
+    "method_fields_equal": true,
+    "registry_projection_equal": true,
+    "raw_hash_projection_equal": true
+  },
+  "method_fields": [
+    "alpha",
+    "confidence_level",
+    "hac_lags",
+    "hac_prewhite",
+    "hac_adjust",
+    "hac_critical_value",
+    "family_sizes",
+    "target",
+    "alternative",
+    "pairing_key",
+    "missing_rule",
+    "accuracy_method",
+    "accuracy_ci",
+    "hac_kernel",
+    "hac_order",
+    "ci_multiplicity",
+    "effect_continuous",
+    "effect_accuracy",
+    "post_data_plan"
+  ],
+  "initialization_rows": 55,
+  "duplicate_initializations": 48,
+  "required_input_files": 261,
+  "explanation_zh": "仅提取已批准的静态依据，来源路径仅用于追溯；不改变方法、评分、排除或阈值。",
+  "explanation_en": "Only approved static evidence is extracted; origin paths are provenance, not runtime prerequisites. No methods, scoring, exclusions or thresholds change."
+}
