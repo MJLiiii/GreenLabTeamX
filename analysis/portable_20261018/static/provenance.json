@@ -56,6 +56,5 @@
   "initialization_rows": 55,
   "duplicate_initializations": 48,
   "required_input_files": 261,
-  "explanation_zh": "仅提取已批准的静态依据，来源路径仅用于追溯；不改变方法、评分、排除或阈值。",
   "explanation_en": "Only approved static evidence is extracted; origin paths are provenance, not runtime prerequisites. No methods, scoring, exclusions or thresholds change."
 }

@@ -59,7 +59,7 @@ make_figures <- function(input, out) {
     ggplot2::scale_x_discrete(drop = FALSE, labels = setNames(strategy_axis, strategy_names))
   )
   index <- list()
-  save_plot <- function(p, id, benchmark, source, unit, level, zh, en, width = 10, height = 7) {
+  save_plot <- function(p, id, benchmark, source, unit, level, en, width = 10, height = 7) {
     png <- file.path(figure_dir, paste0(id, ".png"))
     pdf <- file.path(figure_dir, paste0(id, ".pdf"))
     if (file.exists(png) || file.exists(pdf)) stop("Refusing to overwrite figure: ", id)
@@ -71,7 +71,7 @@ make_figures <- function(input, out) {
       figure_id = id, benchmark = benchmark,
       png = file.path("figures", basename(png)), pdf = file.path("figures", basename(pdf)),
       input = source, unit = unit, level = level,
-      description_zh = zh, description_en = en, width_in = width, height_in = height,
+      description_en = en, width_in = width, height_in = height,
       stringsAsFactors = FALSE
     )
   }
@@ -108,7 +108,6 @@ make_figures <- function(input, out) {
                            "Energy (J/query)", paste0(energy_note, "\nViolin, box and points describe the same question-level data; no inferential intervals."))
     save_plot(p, paste0(benchmark_id, "_energy_distribution"), benchmark_id,
               "question_summary.csv", "J/query", "question_mean",
-              "每题跨重复均值的 GPU、CPU gross 能耗分布；两面板纵轴分别缩放。",
               "GPU and CPU gross-energy distributions of question means; panels use separate vertical scales.",
               width = 11, height = 7)
 
@@ -120,7 +119,6 @@ make_figures <- function(input, out) {
                            facet = FALSE)
     save_plot(p, paste0(benchmark_id, "_latency_distribution"), benchmark_id,
               "question_summary.csv", "s/query", "question_mean",
-              "每题五次单调计时延迟均值分布，毫秒除以1000换成秒，包含整个 query。",
               "Distribution of five-repeat question latency means, converted from milliseconds to seconds; full query window.")
 
     runs <- data.table::rbindlist(lapply(c("gpu_trapezoid_j", "cpu_j", "latency_ms"), function(field) {
@@ -150,7 +148,6 @@ make_figures <- function(input, out) {
                         "All displayed run means use 200 queries. Identical repetition labels do not establish matched run blocks."))
     save_plot(p, paste0(benchmark_id, "_run_means"), benchmark_id, "query_metrics.csv",
               "J/query; s/query", "run_mean",
-              "各策略五次运行均值；横向小位移对应 repetition 1至5，三角形标明能耗分母199。",
               "Five run means per strategy; horizontal offsets identify repetitions 1 to 5; a triangle marks energy denominator 199.",
               width = 12, height = 6.8)
 
@@ -176,7 +173,6 @@ make_figures <- function(input, out) {
                       "Majority correctness means at least 3 correct outcomes among 5 repeats, not an answer-text vote.\nOpen circles show repetitions 1 to 5 from left to right, including equal accuracies; no inferential intervals are shown.")
     save_plot(p, paste0(benchmark_id, "_accuracy"), benchmark_id,
               "question_summary.csv; query_metrics.csv", "%", "question_majority_and_run",
-              "多数正确性、五次运行准确率和平均运行准确率分别显示；无推断性区间。",
               "Majority correctness, five individual run accuracies and mean run accuracy are displayed separately, without inferential intervals.",
               width = 10, height = 7.2)
 
@@ -201,7 +197,6 @@ make_figures <- function(input, out) {
                                        "Every energy question mean uses five repeats. Horizontal axes differ between devices."))
     save_plot(p, paste0(benchmark_id, "_energy_accuracy"), benchmark_id, "question_summary.csv",
               "J/query; %", "strategy_summary_of_questions",
-              "以200道题等权能耗均值及多数正确率描述权衡；不作显著性或统计支配解释。",
               "Descriptive tradeoff between equal-weight mean question energy and majority accuracy over 200 questions; no significance or statistical dominance interpretation.",
               width = 11, height = 6.5)
 
@@ -223,7 +218,6 @@ make_figures <- function(input, out) {
                                     "Denominator: 1000 query executions per strategy (200 repeated questions, not 1000 independent items).\nRejected cascade calls and MF embeddings remain in energy, latency and call totals; labels below 4% are omitted.")
     save_plot(p, paste0(benchmark_id, "_final_models"), benchmark_id, "query_metrics.csv",
               "% of 1000 query executions per strategy", "query_execution_final_model",
-              "最终答案模型比例，分母为每策略1000次逐题执行；不表示1000道独立题目。",
               "Final-answer model shares among 1000 query executions per strategy, not 1000 independent questions.")
 
     quality <- qq[, .(truncation = 100 * mean(truncated_flag), extraction_failure = 100 * mean(extraction_flag)), by = strategy_plot]
@@ -244,7 +238,6 @@ make_figures <- function(input, out) {
                       "Each rate uses 1000 query executions per strategy. Truncation and extraction failure can overlap.\nA truncated answer can still score correct under the preserved scoring implementation.")
     save_plot(p, paste0(benchmark_id, "_quality_flags"), benchmark_id, "query_metrics.csv",
               "% of 1000 query executions per strategy", "query_execution_final_output",
-              "最终输出截断率与答案提取失败率；分母为1000次逐题执行，两类标记可能重合。",
               "Final-output truncation and extraction-failure rates among 1000 query executions per strategy; flags may overlap.",
               width = 11, height = 6.5)
 
@@ -259,7 +252,6 @@ make_figures <- function(input, out) {
                            "Left panel: |left hold - trapezoid| in J/query. Right panel: 100 x (left hold - trapezoid) / trapezoid.\n200 question means per strategy; separate vertical scales. This describes method sensitivity, not sensor precision or an effect size.")
     save_plot(p, paste0(benchmark_id, "_method_sensitivity"), benchmark_id, "question_summary.csv",
               "absolute J/query; signed %", "question_mean_method_difference",
-              "每题均值上的积分方法差：绝对差|左保持-梯形|与相对差百分数；不代表传感器精度或正式效应量。",
               "Question-mean integration differences: absolute |left hold - trapezoid| and signed relative percent; not sensor accuracy or a formal effect size.",
               width = 11.5, height = 7)
   }
