@@ -8,7 +8,6 @@
   "required_relative_prefix": "results/main/",
   "custodian": "Shiyuan",
   "public_download_url_provided": true,
-  "instruction_zh": "从已发布Release下载ZIP和SHA-256侧车，先核对整包大小及批准哈希；按字节保留说明在results/main不存在的独立复现目录解压，不能覆盖历史文件。25路径属性规则已纳入发布代码；范围外文本不保证Git检出字节相同。历史远端原始文件核对仍固定于remote_fixed_commit，不与本次release_commit混用。",
   "instruction_en": "Download the ZIP and SHA-256 sidecar from the published Release, then check archive size and approved hash. Follow byte-preservation guidance and extract in a separate reproduction workspace without results/main; do not overwrite historical files. The25-path attributes are included in published code; text outside their scope has no guaranteed checkout-byte identity. Historical remote raw-file verification remains pinned to remote_fixed_commit, distinct from release_commit.",
   "remote_url": "https://github.com/MJLiiii/GreenLabTeamX.git",
   "remote_default_branch": "main",

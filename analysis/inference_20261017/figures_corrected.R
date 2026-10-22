@@ -121,7 +121,7 @@ make_inference_figures <- function(out, figure_subdir = "figures", checks_filena
     tx(caption, 0.025, 0.068, 9)
     yy
   }
-  save <- function(draw, id, benchmark, metric, source, desc_zh, desc_en, ids) {
+  save <- function(draw, id, benchmark, metric, source, desc_en, ids) {
     png_path <- file.path(figure_dir, paste0(id, ".png"))
     pdf_path <- file.path(figure_dir, paste0(id, ".pdf"))
     if (any(file.exists(c(png_path, pdf_path)))) stop("Refusing existing figure: ", id)
@@ -136,7 +136,7 @@ make_inference_figures <- function(out, figure_subdir = "figures", checks_filena
       pdf = file.path(figure_subdir, basename(pdf_path)), input = source,
       unit = if (grepl("^hac_", id)) "HAC SE / paired-t SE (dimensionless)" else unit_names[[metric]],
       level = "paired question repeat-means; conditional on recorded runs",
-      comparison_ids = paste(ids, collapse = ";"), description_zh = desc_zh,
+      comparison_ids = paste(ids, collapse = ";"),
       description_en = desc_en, width_in = 14, height_in = 6.7, stringsAsFactors = FALSE)
   }
   for (bench_key in names(benchmark_names)) for (metric_key in names(metric_names)) {
@@ -193,7 +193,6 @@ make_inference_figures <- function(out, figure_subdir = "figures", checks_filena
       }
     })
     save(draw_forest, plot_id, bench_key, metric_key, "all_primary_tests.csv",
-      "按题目配对的 A−B 差及未调整逐比较95%区间；右列独立报告 Holm 判断。不得从区间是否跨零推定校正后判断。",
       "Paired A-minus-B differences and unadjusted pointwise 95% intervals; the separate right column reports Holm decisions, which must not be inferred from interval overlap with zero.", wanted)
   }
   for (bench_key in names(benchmark_names)) for (metric_key in names(metric_names)[1:3]) {
@@ -249,7 +248,6 @@ make_inference_figures <- function(out, figure_subdir = "figures", checks_filena
       }
     })
     save(draw_hac, plot_id, bench_key, metric_key, "hac_sensitivity.csv; all_primary_tests.csv",
-      "固定 lag=5、10、20 的 HAC 与主要配对t标准误之比；右列分别展示每个 lag 的原比较族 Holm 判断。三个 lag 不构成联合错误率保证，也不用于择优。",
       "Ratios of HAC to primary paired-t standard errors at fixed lags 5, 10 and 20. Separate columns show original-family Holm decisions for each lag; there is no across-lag joint guarantee and no selection of a preferred lag.", wanted)
   }
   check_path <- file.path(out, checks_filename)

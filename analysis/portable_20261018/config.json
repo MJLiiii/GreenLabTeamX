@@ -9,7 +9,7 @@
     "zoo"
   ],
   "asset_manifest": "analysis/portable_20261018/static/assets.csv",
-  "asset_manifest_sha256": "c35c659d22b81301b9f8341ee3cdb54904b6223c2bd3d9044d0bf914ed85bfb6",
+  "asset_manifest_sha256": "19d69cb0ebb90a05aa59f7440ec6fb0209c482ca737ee88510ea241994f00527",
   "static_directory": "analysis/portable_20261018/static",
   "absolute_tolerance": 1e-10,
   "relative_tolerance": 1e-10,

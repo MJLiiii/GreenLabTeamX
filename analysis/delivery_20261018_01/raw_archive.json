@@ -20,7 +20,6 @@
   "distribution_status": "published_release_download_verified",
   "normal_git_history_inclusion": "excluded_release_attachment_only",
   "download_url": "https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/GreenLabTeamX_raw_inputs_8f3765b_localbytes_20261018.zip",
-  "note_zh": "独立分发附件；仅261个原始文件，无目录项、附加说明或清单混入ZIP。逐项验证解压流字节，不在原目录解压。",
   "note_en": "Independent distribution attachment: only261 raw files, without directory entries, documentation or manifests added to ZIP. Decompressed member bytes verified in streams, without extracting into original directories.",
   "checksum_download_url": "https://github.com/MJLiiii/GreenLabTeamX/releases/download/assignment3-reproducibility-v1.0.0/raw_archive.sha256",
   "release_url": "https://github.com/MJLiiii/GreenLabTeamX/releases/tag/assignment3-reproducibility-v1.0.0",

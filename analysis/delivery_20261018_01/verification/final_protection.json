@@ -19,6 +19,5 @@
   "git_state_unchanged": true,
   "r_protection_passed": true,
   "r_protected_files": 1577,
-  "scope_zh": "逐文件清单、大小及SHA-256复核，覆盖原始数据、代码、既有交付及可移植入口。排除根.git及本轮两个新目录；随后仅写新包清单和ZIP，不再修改源材料。",
   "scope_en": "File inventories, sizes and SHA-256 cover original data/code, prior deliveries and the portable entry. Excludes root .git and this task's two new directories; subsequent operations only write the new package manifest/ZIP, not source materials."
 }

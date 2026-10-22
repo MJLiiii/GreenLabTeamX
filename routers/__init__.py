@@ -1,7 +1,7 @@
 """
 Routing strategies, by command-line name.
 
-Canonical names are the five strategies in AGENT.md. Older names remain as
+Canonical names are listed in CANONICAL_STRATEGIES below. Older names remain as
 aliases so existing commands keep working.
 
 Cascade and matrix-factorization thresholds come from

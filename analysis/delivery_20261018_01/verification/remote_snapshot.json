@@ -24,6 +24,5 @@
   "individual_HTTP_URL_statuses_checked": false,
   "remote_access_failures_counted_as_missing": false,
   "git_writes_performed": false,
-  "note_zh": "LF等价仅解释字节差异，不把不同字节写成一致；不改变输入哈希或原文件。",
   "note_en": "LF equivalence explains byte differences only; differing bytes are not called identical. No input hashes or original files are changed."
 }
