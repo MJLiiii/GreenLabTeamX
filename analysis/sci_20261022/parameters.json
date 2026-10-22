@@ -1,0 +1,16 @@
+{
+  "specification": "Software Carbon Intensity specification v1.1.0",
+  "grid_region": "Netherlands (assumed from VU Amsterdam lab context)",
+  "grid_g_co2e_per_kwh": 260.0,
+  "grid_factor_basis": "2026 Dutch location-based gridmix: 244 gCO2e/kWh production and fuel chain plus 16 gCO2e/kWh electricity infrastructure; annual reporting factor, not measured October 2026 intensity",
+  "other_hardware_w": 30.0,
+  "power_supply_efficiency": 0.90,
+  "pue": 1.20,
+  "embodied_kg_co2e": 772.46,
+  "embodied_basis": "Whole-workstation proxy: Dell Precision 7960 Tower PCF, March 2023: 2971 kgCO2e times (22.9% manufacturing + 2.5% transport + 0.6% end of life). Not an LCA of glg2 or its actual two GPUs.",
+  "expected_life_years": 4.0,
+  "hours_per_year": 8760,
+  "resource_share": 1.0,
+  "calibration_power_multiplier": 1.0,
+  "notes": "Other hardware, PSU efficiency, PUE, lifespan and exclusive reservation are explicit modeling assumptions. No idle subtraction. Calibration power is estimated from the corresponding evaluation benchmark and fixed-model strategy. Initial setup uses the recorded creation-to-first-process elapsed time less the first cooldown. Unknown later setup, fitting, downloads, tests and analysis time are excluded and disclosed, not treated as measured zero."
+}

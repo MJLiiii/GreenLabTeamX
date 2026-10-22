@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "specification": "Software Carbon Intensity specification v1.1.0",
+    "grid_region": "Netherlands (assumed from VU Amsterdam lab context)",
+    "grid_g_co2e_per_kwh": 260.0,
+    "grid_factor_basis": "2026 Dutch location-based gridmix: 244 gCO2e/kWh production and fuel chain plus 16 gCO2e/kWh electricity infrastructure; annual reporting factor, not measured October 2026 intensity",
+    "other_hardware_w": 30.0,
+    "power_supply_efficiency": 0.9,
+    "pue": 1.2,
+    "embodied_kg_co2e": 772.46,
+    "embodied_basis": "Whole-workstation proxy: Dell Precision 7960 Tower PCF, March 2023: 2971 kgCO2e times (22.9% manufacturing + 2.5% transport + 0.6% end of life). Not an LCA of glg2 or its actual two GPUs.",
+    "expected_life_years": 4.0,
+    "hours_per_year": 8760,
+    "resource_share": 1.0,
+    "calibration_power_multiplier": 1.0,
+    "notes": "Other hardware, PSU efficiency, PUE, lifespan and exclusive reservation are explicit modeling assumptions. No idle subtraction. Calibration power is estimated from the corresponding evaluation benchmark and fixed-model strategy. Initial setup uses the recorded creation-to-first-process elapsed time less the first cooldown. Unknown later setup, fitting, downloads, tests and analysis time are excluded and disclosed, not treated as measured zero."
+  },
+  "functional_units": {
+    "evaluation": "one executed held-out benchmark query, including all router/model calls",
+    "campaign": "one recorded campaign subtotal, R=1; alternatively allocate its carbon over 10000 held-out query executions",
+    "distinct_held_out_questions": 400,
+    "executed_held_out_queries": 10000,
+    "executed_calibration_queries": 3600
+  },
+  "measured_cpu_j": 21712392.928649902,
+  "measured_gpu_j": 34767436.14374799,
+  "idle_cpu_gpu_mean_w": 69.50773679043748,
+  "evaluation_cpu_gpu_mean_w": 262.77756584717775,
+  "main_elapsed_s": 381211.209,
+  "unallocated_main_gap_s": 162586.48299999998,
+  "scopes": {
+    "evaluation_sampled": {
+      "duration_s": 214854.507,
+      "cpu_gpu_j": 56458944.36075542,
+      "cpu_gpu_kwh": 15.683040100209839,
+      "facility_kwh": 23.297992433613118,
+      "operational_g_co2e": 6057.478032739411,
+      "embodied_g_co2e": 1315.690896730879,
+      "total_g_co2e": 7373.16892947029,
+      "sci_g_co2e_per_evaluation_query": 0.737316892947029
+    },
+    "main_sampled_including_idle": {
+      "duration_s": 215154.973,
+      "cpu_gpu_j": 56479829.072397895,
+      "cpu_gpu_kwh": 15.688841408999416,
+      "facility_kwh": 23.309066023110333,
+      "operational_g_co2e": 6060.357166008686,
+      "embodied_g_co2e": 1317.5308412891616,
+      "total_g_co2e": 7377.888007297848,
+      "sci_g_co2e_per_evaluation_query": 0.7377888007297848
+    },
+    "main_protocol_subtotal": {
+      "duration_s": 218624.726,
+      "cpu_gpu_j": 56753271.42943793,
+      "cpu_gpu_kwh": 15.764797619288313,
+      "facility_kwh": 23.448893781273306,
+      "operational_g_co2e": 6096.712383131059,
+      "embodied_g_co2e": 1338.7783473328893,
+      "total_g_co2e": 7435.490730463948,
+      "sci_g_co2e_per_evaluation_query": 0.7435490730463948
+    },
+    "recorded_campaign_subtotal": {
+      "duration_s": 284046.836,
+      "cpu_gpu_j": 73758951.48572995,
+      "cpu_gpu_kwh": 20.488597634924986,
+      "facility_kwh": 30.474206135455535,
+      "operational_g_co2e": 7923.293595218439,
+      "embodied_g_co2e": 1739.3995666584221,
+      "total_g_co2e": 9662.693161876861,
+      "sci_g_co2e_per_evaluation_query": 0.9662693161876861
+    },
+    "campaign_if_main_continuously_reserved": {
+      "duration_s": 446633.31899999996,
+      "cpu_gpu_j": 85059969.95177689,
+      "cpu_gpu_kwh": 23.62776943104914,
+      "facility_kwh": 36.46628500806551,
+      "operational_g_co2e": 9481.234102097033,
+      "embodied_g_co2e": 2735.020084940544,
+      "total_g_co2e": 12216.254187037577,
+      "sci_g_co2e_per_evaluation_query": 1.2216254187037576
+    }
+  },
+  "raw_trace_checks_passed": 55,
+  "raw_hashes_different_from_historical": 55,
+  "missing_query_tail_ms": 2.0,
+  "excluded_initialization_j": 131.61904907226562,
+  "limitations": [
+    "Annual Dutch grid factor and physical Netherlands location assumption.",
+    "Additional hardware power, PSU efficiency, cooling and whole-machine LCA proxy are modeled.",
+    "Recorded campaign is a subtotal: unlogged model loading, downloads, router fitting, additional warmups/retries, development, analysis and report-writing are unquantified.",
+    "Continuous reservation across timestamp gaps is unknown; shown separately.",
+    "A 2 ms query tail is unmetered; no extrapolation is added to sampled-window totals.",
+    "Five repetitions reuse the same questions; no independent-query or causal claim follows."
+  ]
+}

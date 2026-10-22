@@ -1,0 +1,23 @@
+{
+  "verified_at_utc": "2026-10-22T01:40:34.531352+00:00",
+  "focused_unit_tests": 6,
+  "focused_unit_tests_pass": true,
+  "raw_traces_replayed": 55,
+  "historical_trace_bytes_match_after_newline_conversion": 55,
+  "ledger_records": 118,
+  "stage_categories": 6,
+  "strategy_cells": 10,
+  "sensitivity_scenarios": 16,
+  "accounting_reconciliation_pass": true,
+  "independent_dimension_and_allocation_checks_pass": true,
+  "functional_unit_denominators_pass": true,
+  "sampling_intervals_nonoverlapping": true,
+  "raw_and_previous_analysis_git_changes": false,
+  "delivery": "Calculation code and CSV/JSON outputs retained; submission reports and report-only rendering code removed from the project on 2026-10-22.",
+  "source_and_calculation_sha256": {
+    "scripts/compute_sci.py": "dbd0764cb21b9f8a086acdbc422e74d65e778690b84d4d30ae433fb8bee7ad62",
+    "tests/test_compute_sci.py": "c1b57328430e7f05f5450ec9b9a6ad553735a7346dab5f5f915beaf359b9bc93",
+    "analysis/sci_20261022/parameters.json": "5e59ad0e416ea6a725903a614d7db318a1f8bd539daa01364694f809630a64f5",
+    "analysis/sci_20261022/summary.json": "ef6a830df17282fbf00b3fa17e1ee7a5bb3f98020a78d285a3b78f208b3f573d"
+  }
+}
