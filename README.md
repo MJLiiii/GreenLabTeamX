@@ -52,6 +52,18 @@ Rscript --vanilla analysis/portable_20261018/main.R --root . --out analysis/ta_r
 
 The quick-start commands use Bash on Linux/macOS. For Windows without Bash, see the [R execution commands](analysis/delivery_20261018_01/README.md#execution).
 
+## Analysis methods
+
+The analysis covers five strategies, two benchmarks and five repetitions, with 200 held-out questions per benchmark.
+
+GPU energy is calculated by trapezoidal integration of the summed power of both GPUs within each query’s recorded time window. CPU energy is calculated from interpolated cumulative-counter differences. Query windows include routing, MF embeddings and rejected cascade calls. Energy is reported without idle subtraction.
+
+Energy and latency are averaged across repetitions within each question and strategy. Strategies are compared using two-sided paired t-tests on 200 question pairs per benchmark. Accuracy uses majority correctness—at least three correct outcomes across five repetitions—and two-sided exact McNemar tests.
+
+Results include paired differences, pointwise 95% confidence intervals and Holm-adjusted p-values across four comparison families of 24, 12, 6 and 12 comparisons. HAC and other sensitivity analyses assess robustness without eliminating shared-run limitations.
+
+See the [detailed methods](analysis/delivery_20261018_01/methods.md) and [final results index](analysis/delivery_20261018_01/final_index.md).
+
 ## Results and validation
 
 The output folder contains:
